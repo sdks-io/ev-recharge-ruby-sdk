@@ -38,8 +38,7 @@ module ShellEv
       []
     end
 
-    def initialize(status = SKIP,
-                   remark = SKIP)
+    def initialize(status = SKIP, remark = SKIP)
       @status = status unless status == SKIP
       @remark = remark unless remark == SKIP
     end

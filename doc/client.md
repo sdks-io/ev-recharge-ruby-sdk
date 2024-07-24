@@ -5,7 +5,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `env` | `EnvEnum` | This variable specifies the type of environment. Environments:<br><br>* `api` - Production<br>* `api-test` - UAT<br>*Default*: `EnvEnum::ENUM_APITESTSHELLCOM` |
 | `environment` | `Environment` | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `connection` | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
 | `adapter` | `Faraday::Adapter` | The Faraday adapter object passed by the SDK user for performing http requests |
@@ -26,8 +25,7 @@ client = ShellEv::Client.new(
     o_auth_client_id: 'OAuthClientId',
     o_auth_client_secret: 'OAuthClientSecret'
   ),
-  environment: Environment::PRODUCTION,
-  env: EnvEnum::ENUM_APITESTSHELLCOM
+  environment: Environment::PRODUCTION
 )
 ```
 
@@ -39,7 +37,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 
 | Name | Description |
 |  --- | --- |
-| charging | Gets ChargingController |
 | locations | Gets LocationsController |
+| charging | Gets ChargingController |
 | o_auth_authorization | Gets OAuthAuthorizationController |
 

@@ -15,3 +15,9 @@ Methods that can be used to Authorize sessions on this EVSE
 | `RFIDTOKEN` |
 | `PNC` |
 
+## Example
+
+```
+NewMotionApp
+```
+

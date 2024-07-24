@@ -9,20 +9,19 @@ module ShellEv
     SKIP = Object.new
     private_constant :SKIP
 
-    # The EV Charge Number which can be found on the back of the Shell EV Card
+    # Ev charge number
     # @return [String]
     attr_accessor :ev_charge_number
 
-    # Standard EVSE (Electric Vehicle Supply Equipment) Id identifier
-    # (ISO-IEC-15118)
+    # This is the Electric Vehicle EquipmentID
     # @return [String]
     attr_accessor :evse_id
 
     # A mapping from model property names to API property names.
     def self.names
       @_hash = {} if @_hash.nil?
-      @_hash['ev_charge_number'] = 'EvChargeNumber'
-      @_hash['evse_id'] = 'EvseId'
+      @_hash['ev_charge_number'] = 'evChargeNumber'
+      @_hash['evse_id'] = 'evseId'
       @_hash
     end
 
@@ -36,8 +35,7 @@ module ShellEv
       []
     end
 
-    def initialize(ev_charge_number = nil,
-                   evse_id = nil)
+    def initialize(ev_charge_number = nil, evse_id = nil)
       @ev_charge_number = ev_charge_number
       @evse_id = evse_id
     end
@@ -48,8 +46,8 @@ module ShellEv
 
       # Extract variables from the hash.
       ev_charge_number =
-        hash.key?('EvChargeNumber') ? hash['EvChargeNumber'] : nil
-      evse_id = hash.key?('EvseId') ? hash['EvseId'] : nil
+        hash.key?('evChargeNumber') ? hash['evChargeNumber'] : nil
+      evse_id = hash.key?('evseId') ? hash['evseId'] : nil
 
       # Create object from extracted values.
       ChargesessionStartBody.new(ev_charge_number,

@@ -21,8 +21,8 @@ module ShellEv
     # A mapping from model property names to API property names.
     def self.names
       @_hash = {} if @_hash.nil?
-      @_hash['request_id'] = 'RequestId'
-      @_hash['status'] = 'Status'
+      @_hash['request_id'] = 'requestId'
+      @_hash['status'] = 'status'
       @_hash
     end
 
@@ -36,8 +36,7 @@ module ShellEv
       []
     end
 
-    def initialize(request_id = nil,
-                   status = nil)
+    def initialize(request_id = nil, status = nil)
       @request_id = request_id
       @status = status
     end
@@ -47,8 +46,8 @@ module ShellEv
       return nil unless hash
 
       # Extract variables from the hash.
-      request_id = hash.key?('RequestId') ? hash['RequestId'] : nil
-      status = hash.key?('Status') ? hash['Status'] : nil
+      request_id = hash.key?('requestId') ? hash['requestId'] : nil
+      status = hash.key?('status') ? hash['status'] : nil
 
       # Create object from extracted values.
       InlineResponse2021.new(request_id,

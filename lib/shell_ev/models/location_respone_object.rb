@@ -95,17 +95,10 @@ module ShellEv
       []
     end
 
-    def initialize(uid = SKIP,
-                   external_id = SKIP,
-                   coordinates = SKIP,
-                   operator_name = SKIP,
-                   address = SKIP,
-                   accessibility = SKIP,
-                   evses = SKIP,
-                   opening_hours = SKIP,
-                   updated = SKIP,
-                   operator_comment = SKIP,
-                   location_type = SKIP)
+    def initialize(uid = SKIP, external_id = SKIP, coordinates = SKIP,
+                   operator_name = SKIP, address = SKIP, accessibility = SKIP,
+                   evses = SKIP, opening_hours = SKIP, updated = SKIP,
+                   operator_comment = SKIP, location_type = SKIP)
       @uid = uid unless uid == SKIP
       @external_id = external_id unless external_id == SKIP
       @coordinates = coordinates unless coordinates == SKIP

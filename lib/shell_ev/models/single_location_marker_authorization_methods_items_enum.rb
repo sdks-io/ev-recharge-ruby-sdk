@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # SingleLocationMarkerAuthorizationMethodsItems.
+  # singleLocationMarkerAuthorizationMethodsItems.
   class SingleLocationMarkerAuthorizationMethodsItemsEnum
     SINGLE_LOCATION_MARKER_AUTHORIZATION_METHODS_ITEMS_ENUM = [
       # TODO: Write general description for NEWMOTIONAPP

@@ -9,13 +9,18 @@ module ShellEv
     SKIP = Object.new
     private_constant :SKIP
 
-    # Error code
+    # requestId is unique identifier value that is attached to requests and
+    # messages that allow reference to a particular transaction or event chain.
     # @return [String]
-    attr_accessor :code
+    attr_accessor :request_id
 
-    # Error desctiption in English
+    # Status of the request
     # @return [String]
-    attr_accessor :message
+    attr_accessor :status
+
+    # Exception details of the error
+    # @return [Array[BadRequestErrMsg]]
+    attr_accessor :errors
 
     # The constructor.
     # @param [String] The reason for raising an exception.
@@ -30,8 +35,18 @@ module ShellEv
     # @param [Hash] The deserialized response sent by the server in the
     # response body.
     def unbox(hash)
-      @code = hash.key?('code') ? hash['code'] : SKIP
-      @message = hash.key?('message') ? hash['message'] : SKIP
+      @request_id = hash.key?('requestId') ? hash['requestId'] : SKIP
+      @status = hash.key?('status') ? hash['status'] : SKIP
+      # Parameter is an array, so we need to iterate through it
+      @errors = nil
+      unless hash['errors'].nil?
+        @errors = []
+        hash['errors'].each do |structure|
+          @errors << (BadRequestErrMsg.from_hash(structure) if structure)
+        end
+      end
+
+      @errors = SKIP unless hash.key?('errors')
     end
   end
 end

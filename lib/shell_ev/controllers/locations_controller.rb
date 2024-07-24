@@ -8,7 +8,7 @@ module ShellEv
   class LocationsController < BaseController
     # This API provides the list of all Shell Recharge locations. The list
     # includes all Shell Recharge network and all locations available through
-    # our roaming partners.The end point provides flexible search criteria in
+    # our roaming partners. The end point provides flexible search criteria in
     # order to get the list of Shell Recharge Network. The end point provides
     # the details such as the exact location/address of the site along with the
     # up-to-date status information of all the charging units in the site.
@@ -17,17 +17,21 @@ module ShellEv
     # * Based on available connector types.
     # * Based on minimum Power output (in kW) available
     # * Based on a specific charging unit ID (EVSE ID)
-    # @param [String] request_id Required parameter: A unique request id in GUID
-    # format. The value is written to the Shell API Platform audit log for end
-    # to end traceability of a request.
-    # @param [GetLocationsListEvseStatusEnum] evse_status Optional parameter:
+    # @param [UUID | String] request_id Required parameter: RequestId must be
+    # unique identifier value that can be used by the consumer to correlate each
+    # request /response .<br>Format.<br> Its canonical textual representation,
+    # the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+    # digits, displayed in five groups separated by hyphens, in the form
+    # 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4
+    # hyphens) <br>
+    # @param [GetEVLocationsEvseStatusEnum] evse_status Optional parameter:
     # Filter by Locations that have the given status
-    # @param [GetLocationsListConnectorTypesEnum] connector_types Optional
+    # @param [GetEVLocationsConnectorTypesEnum] connector_types Optional
     # parameter: Filter by Locations that have Connectors with the set of
     # Connector Types
     # @param [Float] connector_min_power Optional parameter: Filter by Locations
     # that have a Connector with at least this power output (in kW)
-    # @param [GetLocationsListAuthorizationMethodsEnum] authorization_methods
+    # @param [GetEVLocationsAuthorizationMethodsEnum] authorization_methods
     # Optional parameter: Filter by Locations that support the given
     # Authorization Methods
     # @param [TrueClass | FalseClass] with_operator_name Optional parameter:
@@ -42,24 +46,32 @@ module ShellEv
     # externalID provided by Shell Recharge)
     # @param [Integer] page_number Optional parameter: Restrict the response
     # list by providing a specific set of page Number. Set perPage parameter
-    # also when pageNumber is used.
+    # also when page Number is used.
     # @param [Integer] per_page Optional parameter: Restrict the number of sites
-    # in reposne per page.
+    # in response per page.
     # @param [String] updated_since Optional parameter: ZonedDateTime as
     # string
-    # @return [Array[LocationResponeObject]] response from the API call
-    def get_locations_list(request_id,
-                           evse_status: nil,
-                           connector_types: nil,
-                           connector_min_power: nil,
-                           authorization_methods: nil,
-                           with_operator_name: nil,
-                           evse_id: nil,
-                           location_external_id: nil,
-                           evse_external_id: nil,
-                           page_number: nil,
-                           per_page: nil,
-                           updated_since: nil)
+    # @param [Array[String]] country Optional parameter: Filter by Locations
+    # that are at least in one of the given countries (specified using ISO
+    # 3166-1 alpha-3 codes)
+    # @param [Array[String]] exclude_country Optional parameter: Filter by
+    # Locations that are not in one of the given countries (specified using ISO
+    # 3166-1 alpha-3 codes)
+    # @return [Response] response from the API call
+    def get_ev_locations(request_id,
+                         evse_status: nil,
+                         connector_types: nil,
+                         connector_min_power: nil,
+                         authorization_methods: nil,
+                         with_operator_name: nil,
+                         evse_id: nil,
+                         location_external_id: nil,
+                         evse_external_id: nil,
+                         page_number: nil,
+                         per_page: nil,
+                         updated_since: nil,
+                         country: nil,
+                         exclude_country: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/locations/v1/ev',
@@ -76,25 +88,35 @@ module ShellEv
                    .query_param(new_parameter(page_number, key: 'pageNumber'))
                    .query_param(new_parameter(per_page, key: 'perPage'))
                    .query_param(new_parameter(updated_since, key: 'updatedSince'))
+                   .query_param(new_parameter(country, key: 'country'))
+                   .query_param(new_parameter(exclude_country, key: 'excludeCountry'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('BearerAuth')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:custom_type_deserializer))
-                   .deserialize_into(LocationResponeObject.method(:from_hash))
-                   .is_response_array(true)
-                   .local_error('400',
-                                'The server cannot or will not process the request due to'\
-                                 ' something that is perceived to be a client error (e.g.,'\
-                                 ' malformed request syntax, invalid request message framing, or'\
-                                 ' deceptive request routing).',
-                                BadRequestException)
-                   .local_error('401',
-                                'The request has not been applied because it lacks valid'\
-                                 ' authentication credentials for the target resource.',
-                                UnauthorizedException)
-                   .local_error('404',
-                                'Location Not Found',
-                                NotFoundException))
+                    .deserializer(APIHelper.method(:custom_type_deserializer))
+                    .deserialize_into(Response.method(:from_hash))
+                    .local_error('400',
+                                 'The server cannot or will not process the request due to'\
+                                  ' something that is perceived to be a client error (e.g.,'\
+                                  ' malformed request syntax, invalid request message framing, or'\
+                                  ' deceptive request routing).',
+                                 BadRequestException)
+                    .local_error('401',
+                                 'The request has not been applied because it lacks valid'\
+                                  ' authentication credentials for the target resource.',
+                                 UnauthorizedException)
+                    .local_error('404',
+                                 'Location Not Found',
+                                 NotFoundException)
+                    .local_error('429',
+                                 'The Request reached maximum allocated rate limit',
+                                 TooManyRequestsException)
+                    .local_error('500',
+                                 'Internal Server error',
+                                 InternalServerErrorException)
+                    .local_error('503',
+                                 'Service unavailable',
+                                 ServiceunavailableException))
         .execute
     end
 
@@ -102,14 +124,24 @@ module ShellEv
     # The query for a single location is to be made using the Unique Internal
     # identifier used to refer to this Location by Shell Recharge. (Uid from
     # List of locations API)
-    # @param [String] request_id Required parameter: A unique request id in GUID
-    # format. The value is written to the Shell API Platform audit log for end
-    # to end traceability of a request.
+    # @param [UUID | String] request_id Required parameter: RequestId must be
+    # unique identifier value that can be used by the consumer to correlate each
+    # request /response .<br>Format.<br> Its canonical textual representation,
+    # the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+    # digits, displayed in five groups separated by hyphens, in the form
+    # 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4
+    # hyphens) <br>
     # @param [String] id Required parameter: Unique Uid of the location from
     # List of locations API
-    # @return [LocationResponeObject] response from the API call
-    def get_location_by_id(request_id,
-                           id)
+    # @param [String] provider_id Optional parameter: The provider id that you
+    # wish to see locations and tariffs for
+    # @param [String] since Optional parameter: to get the locations modified
+    # after a date
+    # @return [Response] response from the API call
+    def ev_locations_by_id(request_id,
+                           id,
+                           provider_id: nil,
+                           since: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/locations/v1/ev/{id}',
@@ -117,29 +149,40 @@ module ShellEv
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .template_param(new_parameter(id, key: 'id')
                                     .should_encode(true))
+                   .query_param(new_parameter(provider_id, key: 'providerId'))
+                   .query_param(new_parameter(since, key: 'since'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('BearerAuth')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:custom_type_deserializer))
-                   .deserialize_into(LocationResponeObject.method(:from_hash))
-                   .local_error('400',
-                                'The server cannot or will not process the request due to'\
-                                 ' something that is perceived to be a client error (e.g.,'\
-                                 ' malformed request syntax, invalid request message framing, or'\
-                                 ' deceptive request routing).',
-                                BadRequestException)
-                   .local_error('401',
-                                'The request has not been applied because it lacks valid'\
-                                 ' authentication credentials for the target resource.',
-                                UnauthorizedException)
-                   .local_error('404',
-                                'Location Not Found',
-                                NotFoundException))
+                    .deserializer(APIHelper.method(:custom_type_deserializer))
+                    .deserialize_into(Response.method(:from_hash))
+                    .local_error('400',
+                                 'The server cannot or will not process the request due to'\
+                                  ' something that is perceived to be a client error (e.g.,'\
+                                  ' malformed request syntax, invalid request message framing, or'\
+                                  ' deceptive request routing).',
+                                 BadRequestException)
+                    .local_error('401',
+                                 'The request has not been applied because it lacks valid'\
+                                  ' authentication credentials for the target resource.',
+                                 UnauthorizedException)
+                    .local_error('404',
+                                 'Location Not Found',
+                                 NotFoundException)
+                    .local_error('429',
+                                 'The Request reached maximum allocated rate limit',
+                                 TooManyRequestsException)
+                    .local_error('500',
+                                 'Internal Server error',
+                                 InternalServerErrorException)
+                    .local_error('503',
+                                 'Service unavailable',
+                                 ServiceunavailableException))
         .execute
     end
 
-    # This API provides the list of all near by Shell Recharge locations based
-    # on the latitude and longitude provided in the request.
+    # This API provides the list of all nearby Shell Recharge locations based on
+    # the latitude and longitude provided in the request.
     # The list includes all Shell Recharge network and all sites available
     # through our roaming partners.
     # The end point provides the details such as the exact location/address of
@@ -150,9 +193,13 @@ module ShellEv
     # * Based on status of the Charging units. Eg : Available or Occupied
     # * Based on available connector types.
     # * Based on minimum Power output (in kW) available
-    # @param [String] request_id Required parameter: A unique request id in GUID
-    # format. The value is written to the Shell API Platform audit log for end
-    # to end traceability of a request.
+    # @param [UUID | String] request_id Required parameter: RequestId must be
+    # unique identifier value that can be used by the consumer to correlate each
+    # request /response .<br>Format.<br> Its canonical textual representation,
+    # the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+    # digits, displayed in five groups separated by hyphens, in the form
+    # 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4
+    # hyphens) <br>
     # @param [Float] latitude Required parameter: Latitude to get Shell Recharge
     # Locations nearby
     # @param [Float] longitude Required parameter: Longitude to get Shell
@@ -169,37 +216,45 @@ module ShellEv
     # given by the Operator, unique for that Operator
     # @param [String] operator_name Optional parameter: Filter by Locations that
     # have the given operator
-    # @param [GetNearbyLocationsEvseStatusEnum] evse_status Optional parameter:
+    # @param [NearbyLocationsEvseStatusEnum] evse_status Optional parameter:
     # Filter by Locations that have the given status
-    # @param [GetNearbyLocationsConnectorTypesEnum] connector_types Optional
+    # @param [NearbyLocationsConnectorTypesEnum] connector_types Optional
     # parameter: Filter by Locations that have Connectors with these Connector
     # Types
     # @param [Float] connector_min_power Optional parameter: Filter by Locations
     # that have a Connector with at least this power output (in kW)
-    # @param [GetNearbyLocationsAuthorizationMethodsEnum] authorization_methods
+    # @param [NearbyLocationsAuthorizationMethodsEnum] authorization_methods
     # Optional parameter: Filter by Locations that support the given
     # Authorization Methods
     # @param [TrueClass | FalseClass] with_operator_name Optional parameter:
-    # Return operator name in marker object (only for marker type
-    # SingleChargePoint)
+    # Return operator name in marker object (only for marker type Single
+    # ChargePoint)
     # @param [TrueClass | FalseClass] with_max_power Optional parameter: Return
     # maximum power in kW across all locations grouped in this marker
     # (disregarding availability)
-    # @return [LocationResponeObject] response from the API call
-    def get_nearby_locations(request_id,
-                             latitude,
-                             longitude,
-                             limit: 25,
-                             location_external_id: nil,
-                             evse_id: nil,
-                             evse_external_id: nil,
-                             operator_name: nil,
-                             evse_status: nil,
-                             connector_types: nil,
-                             connector_min_power: nil,
-                             authorization_methods: nil,
-                             with_operator_name: nil,
-                             with_max_power: nil)
+    # @param [Array[String]] country Optional parameter: Filter by Locations
+    # that are at least in one of the given countries (specified using ISO
+    # 3166-1 alpha-3 codes)
+    # @param [Array[String]] exclude_country Optional parameter: Filter by
+    # Locations that are not in one of the given countries (specified using ISO
+    # 3166-1 alpha-3 codes)
+    # @return [Response] response from the API call
+    def nearby_locations(request_id,
+                         latitude,
+                         longitude,
+                         limit: 25,
+                         location_external_id: nil,
+                         evse_id: nil,
+                         evse_external_id: nil,
+                         operator_name: nil,
+                         evse_status: nil,
+                         connector_types: nil,
+                         connector_min_power: nil,
+                         authorization_methods: nil,
+                         with_operator_name: nil,
+                         with_max_power: nil,
+                         country: nil,
+                         exclude_country: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/locations/v1/ev/nearby',
@@ -218,24 +273,35 @@ module ShellEv
                    .query_param(new_parameter(authorization_methods, key: 'authorizationMethods'))
                    .query_param(new_parameter(with_operator_name, key: 'withOperatorName'))
                    .query_param(new_parameter(with_max_power, key: 'withMaxPower'))
+                   .query_param(new_parameter(country, key: 'country'))
+                   .query_param(new_parameter(exclude_country, key: 'excludeCountry'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('BearerAuth')))
         .response(new_response_handler
-                   .deserializer(APIHelper.method(:custom_type_deserializer))
-                   .deserialize_into(LocationResponeObject.method(:from_hash))
-                   .local_error('400',
-                                'The server cannot or will not process the request due to'\
-                                 ' something that is perceived to be a client error (e.g.,'\
-                                 ' malformed request syntax, invalid request message framing, or'\
-                                 ' deceptive request routing).',
-                                BadRequestException)
-                   .local_error('401',
-                                'The request has not been applied because it lacks valid'\
-                                 ' authentication credentials for the target resource.',
-                                UnauthorizedException)
-                   .local_error('404',
-                                'Location Not Found',
-                                NotFoundException))
+                    .deserializer(APIHelper.method(:custom_type_deserializer))
+                    .deserialize_into(Response.method(:from_hash))
+                    .local_error('400',
+                                 'The server cannot or will not process the request due to'\
+                                  ' something that is perceived to be a client error (e.g.,'\
+                                  ' malformed request syntax, invalid request message framing, or'\
+                                  ' deceptive request routing).',
+                                 BadRequestException)
+                    .local_error('401',
+                                 'The request has not been applied because it lacks valid'\
+                                  ' authentication credentials for the target resource.',
+                                 UnauthorizedException)
+                    .local_error('404',
+                                 'Location Not Found',
+                                 NotFoundException)
+                    .local_error('429',
+                                 'The Request reached maximum allocated rate limit',
+                                 TooManyRequestsException)
+                    .local_error('500',
+                                 'Internal Server error',
+                                 InternalServerErrorException)
+                    .local_error('503',
+                                 'Service unavailable',
+                                 ServiceunavailableException))
         .execute
     end
 
@@ -247,9 +313,13 @@ module ShellEv
     #   * Based on status of the Charging units. Eg : Available or Occupied
     #   * Based on available connector types.
     #   * Based on minimum Power output (in kW) available
-    # @param [String] request_id Required parameter: A unique request id in GUID
-    # format. The value is written to the Shell API Platform audit log for end
-    # to end traceability of a request.
+    # @param [UUID | String] request_id Required parameter: RequestId must be
+    # unique identifier value that can be used by the consumer to correlate each
+    # request /response .<br>Format.<br> Its canonical textual representation,
+    # the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+    # digits, displayed in five groups separated by hyphens, in the form
+    # 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4
+    # hyphens) <br>
     # @param [Float] west Required parameter: Longitude of the western bound to
     # get the Shell Recharge Locations
     # @param [Float] south Required parameter: Latitude of the southern bound to
@@ -260,14 +330,14 @@ module ShellEv
     # get the Shell Recharge Locations
     # @param [String] zoom Required parameter: Zoom level to show ex: (1: World,
     # 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings)
-    # @param [GetMarkersListEvseStatusEnum] evse_status Optional parameter:
+    # @param [LocationsMarkersEvseStatusEnum] evse_status Optional parameter:
     # Filter by Locations that have the given status
-    # @param [GetMarkersListConnectorTypesEnum] connector_types Optional
+    # @param [LocationsMarkersConnectorTypesEnum] connector_types Optional
     # parameter: Filter by Locations that have Connectors with the set of
     # Connector Types
     # @param [Float] connector_min_power Optional parameter: Filter by Locations
     # that have a Connector with at least this power output (in kW)
-    # @param [GetMarkersListAuthorizationMethodsEnum] authorization_methods
+    # @param [LocationsMarkersAuthorizationMethodsEnum] authorization_methods
     # Optional parameter: Filter by Locations that support the given
     # Authorization Methods
     # @param [TrueClass | FalseClass] with_operator_name Optional parameter:
@@ -286,23 +356,31 @@ module ShellEv
     # given by the Operator, unique for that Operator
     # @param [String] operator_name Optional parameter: Filter by Locations that
     # have the given operator
-    # @return [Array[SingleLocationMarker | MultiLocationMarker]] response from the API call
-    def get_markers_list(request_id,
-                         west,
-                         south,
-                         east,
-                         north,
-                         zoom,
-                         evse_status: nil,
-                         connector_types: nil,
-                         connector_min_power: nil,
-                         authorization_methods: nil,
-                         with_operator_name: nil,
-                         with_max_power: nil,
-                         location_external_id: nil,
-                         evse_id: nil,
-                         evse_external_id: nil,
-                         operator_name: nil)
+    # @param [Array[String]] country Optional parameter: Filter by Locations
+    # that are at least in one of the given countries (specified using ISO
+    # 3166-1 alpha-3 codes)
+    # @param [Array[String]] exclude_country Optional parameter: Filter by
+    # Locations that are not in one of the given countries (specified using ISO
+    # 3166-1 alpha-3 codes)
+    # @return [SingleLocationMarkerResponse] response from the API call
+    def locations_markers(request_id,
+                          west,
+                          south,
+                          east,
+                          north,
+                          zoom,
+                          evse_status: nil,
+                          connector_types: nil,
+                          connector_min_power: nil,
+                          authorization_methods: nil,
+                          with_operator_name: nil,
+                          with_max_power: nil,
+                          location_external_id: nil,
+                          evse_id: nil,
+                          evse_external_id: nil,
+                          operator_name: nil,
+                          country: nil,
+                          exclude_country: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/locations/v1/ev/markers',
@@ -323,29 +401,35 @@ module ShellEv
                    .query_param(new_parameter(evse_id, key: 'evseId'))
                    .query_param(new_parameter(evse_external_id, key: 'evseExternalId'))
                    .query_param(new_parameter(operator_name, key: 'operatorName'))
+                   .query_param(new_parameter(country, key: 'country'))
+                   .query_param(new_parameter(exclude_country, key: 'excludeCountry'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('BearerAuth')))
         .response(new_response_handler
-                   .deserializer(proc do |response, should_symbolize|
-                     APIHelper.deserialize_union_type(
-                       UnionTypeLookUp.get(:MarkersResponse),
-                       response, should_symbolize, true
-                     )
-                   end)
-                   .is_response_array(true)
-                   .local_error('400',
-                                'The server cannot or will not process the request due to'\
-                                 ' something that is perceived to be a client error (e.g.,'\
-                                 ' malformed request syntax, invalid request message framing, or'\
-                                 ' deceptive request routing).',
-                                BadRequestException)
-                   .local_error('401',
-                                'The request has not been applied because it lacks valid'\
-                                 ' authentication credentials for the target resource.',
-                                UnauthorizedException)
-                   .local_error('404',
-                                'Location Not Found',
-                                NotFoundException))
+                    .deserializer(APIHelper.method(:custom_type_deserializer))
+                    .deserialize_into(SingleLocationMarkerResponse.method(:from_hash))
+                    .local_error('400',
+                                 'The server cannot or will not process the request due to'\
+                                  ' something that is perceived to be a client error (e.g.,'\
+                                  ' malformed request syntax, invalid request message framing, or'\
+                                  ' deceptive request routing).',
+                                 BadRequestException)
+                    .local_error('401',
+                                 'The request has not been applied because it lacks valid'\
+                                  ' authentication credentials for the target resource.',
+                                 UnauthorizedException)
+                    .local_error('404',
+                                 'Location Not Found',
+                                 NotFoundException)
+                    .local_error('429',
+                                 'The Request reached maximum allocated rate limit',
+                                 TooManyRequestsException)
+                    .local_error('500',
+                                 'Internal server error',
+                                 InternalServerErrorException)
+                    .local_error('503',
+                                 'Service unavailable',
+                                 ServiceunavailableException))
         .execute
     end
   end

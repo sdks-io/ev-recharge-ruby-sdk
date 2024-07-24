@@ -14,16 +14,16 @@ module ShellEv
       @auth_managers['BearerAuth']
     end
 
-    # Access to charging controller.
-    # @return [ChargingController] Returns the controller instance.
-    def charging
-      @charging ||= ChargingController.new @global_configuration
-    end
-
     # Access to locations controller.
     # @return [LocationsController] Returns the controller instance.
     def locations
       @locations ||= LocationsController.new @global_configuration
+    end
+
+    # Access to charging controller.
+    # @return [ChargingController] Returns the controller instance.
+    def charging
+      @charging ||= ChargingController.new @global_configuration
     end
 
     # Access to o_auth_authorization controller.
@@ -37,7 +37,7 @@ module ShellEv
       max_retries: 0, retry_interval: 1, backoff_factor: 2,
       retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
       retry_methods: %i[get put], http_callback: nil,
-      environment: Environment::PRODUCTION, env: EnvEnum::ENUM_APITESTSHELLCOM,
+      environment: Environment::PRODUCTION,
       client_credentials_auth_credentials: nil, config: nil
     )
       @config = if config.nil?
@@ -47,7 +47,7 @@ module ShellEv
                     backoff_factor: backoff_factor,
                     retry_statuses: retry_statuses,
                     retry_methods: retry_methods, http_callback: http_callback,
-                    environment: environment, env: env,
+                    environment: environment,
                     client_credentials_auth_credentials: client_credentials_auth_credentials
                   )
                 else

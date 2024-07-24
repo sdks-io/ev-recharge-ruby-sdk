@@ -16,3 +16,9 @@ The current status of the EVSE units availability
 | `UNAVAILABLE` |
 | `UNKNOWN` |
 
+## Example
+
+```
+Available
+```
+

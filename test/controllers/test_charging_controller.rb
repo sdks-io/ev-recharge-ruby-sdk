@@ -13,17 +13,14 @@ class ChargingControllerTests < ControllerTestBase
     @response_catcher = @controller.http_call_back
   end
 
-  # This API initiates to start a session on a EVSE (Electric Vehicle Supply Equipement). When the EV Charge Card number and the unique EVSE ID on the location is provided, the session is initiated. 
-  #
-  #Please note that this is an asynchronous request, the request will be passed on to the operator/platform to be processed further. 
-  #
-  def test_start_charge_session
+  # This endpoint start the charging session for the user.
+  def test_start
     # Parameters for the API call
-    request_id = 'eb621f45-a543-4d9a-a934-2f223b263c42'
+    request_id = '123e4567-e89b-12d3-a456-426614174000'
     body = nil
 
     # Perform the API call through the SDK function
-    result = @controller.start_charge_session(request_id, body: body)
+    result = @controller.start(request_id, body: body)
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)
@@ -37,21 +34,21 @@ class ChargingControllerTests < ControllerTestBase
     # Test whether the captured response is as we expected
     refute_nil(result)
     expected_body = JSON.parse(
-      '{"RequestId":"9d2dee33-7803-485a-a2b1-2c7538e597ee","Status":"SUCCESS",'\
-      '"Data":[{"SessionId":"c3e332f0-1bb2-4f50-a96b-e075bbb71e68"}]}'
+      '{"requestId":"9d2dee33-7803-485a-a2b1-2c7538e597ee","status":"SUCCESS",'\
+      '"data":[{"sessionId":"c3e332f0-1bb2-4f50-a96b-e075bbb71e68"}]}'
     )
     received_body = JSON.parse(@response_catcher.response.raw_body)
     assert(ComparisonHelper.match_body(expected_body, received_body))
   end
 
-  # This API retrieves the list of active sessions for a given set of EMAIds
-  def test_active
+  # Accepts a request to stop an active session when a valid session id is provided.
+  def test_stop
     # Parameters for the API call
-    ema_id = 'NL-TNM-C0216599X-A'
-    request_id = 'eb621f45-a543-4d9a-a934-2f223b263c42'
+    request_id = '123e4567-e89b-12d3-a456-426614174000'
+    session_id = 'c3e332f0-1bb2-4f50-a96b-e075bbb71e68'
 
     # Perform the API call through the SDK function
-    result = @controller.active(ema_id, request_id)
+    result = @controller.stop(request_id, session_id)
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)
@@ -65,11 +62,71 @@ class ChargingControllerTests < ControllerTestBase
     # Test whether the captured response is as we expected
     refute_nil(result)
     expected_body = JSON.parse(
-      '{"RequestId":"9d2dee33-7803-485a-a2b1-2c7538e597ee","Status":"SUCCESS",'\
-      '"Data":[{"EmaId":"NL-TNM-C0216599X-A","EvseId":"NL*TNM*EVIRTUALCP0002*0'\
-      '","Id":"260f17a9-52d4-4b40-ae74-83832b538975","StartedAt":"2022-10-21T0'\
-      '9:11:23.455Z","SessionState":"started","SessionCode":null,"SessionMessa'\
-      'ge":null,"UserId":"96f69b3b-8ad4-487a-baaa-f1d3db741e88"}]}'
+      '{"requestId":"9d2dee33-7803-485a-a2b1-2c7538e597ee","status":"SUCCESS"}'
+    )
+    received_body = JSON.parse(@response_catcher.response.raw_body)
+    assert(ComparisonHelper.match_body(expected_body, received_body))
+  end
+
+  # This endpoint returns the details of the session if the session is found.
+  def test_get_charge_session_retrieve
+    # Parameters for the API call
+    request_id = '123e4567-e89b-12d3-a456-426614174000'
+    session_id = 'c3e332f0-1bb2-4f50-a96b-e075bbb71e68'
+
+    # Perform the API call through the SDK function
+    result = @controller.get_charge_session_retrieve(request_id, session_id)
+
+    # Test response code
+    assert_equal(200, @response_catcher.response.status_code)
+
+    # Test headers
+    expected_headers = {}
+    expected_headers['content-type'] = 'application/json'
+
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
+
+    # Test whether the captured response is as we expected
+    refute_nil(result)
+    expected_body = JSON.parse(
+      '{"requestId":"9d2dee33-7803-485a-a2b1-2c7538e597ee","status":"SUCCESS",'\
+      '"data":[{"id":"78b5d7a3-bdba-43d7-9851-1c84fcddb782","userId":"281482b6'\
+      '-2c9a-4fd1-b3ea-1928edb40ef9","emaId":"NL-TNM-C00122045-K","evseId":"NL'\
+      '*TNM*E02003451*0","lastUpdated":"2024-06-19T07:36:57.985998Z","startedA'\
+      't":"2024-06-19T11:20:27Z","stoppedAt":"2014-06-19T12:20:27Z","sessionSt'\
+      'ate":{"status":"Started"}}]}'
+    )
+    received_body = JSON.parse(@response_catcher.response.raw_body)
+    assert(ComparisonHelper.match_body(expected_body, received_body))
+  end
+
+  # Fetrches the active sessions for user.
+  def test_active
+    # Parameters for the API call
+    request_id = '123e4567-e89b-12d3-a456-426614174000'
+    ema_id = 'NL-TNM-C0216599X-A'
+
+    # Perform the API call through the SDK function
+    result = @controller.active(request_id, ema_id)
+
+    # Test response code
+    assert_equal(200, @response_catcher.response.status_code)
+
+    # Test headers
+    expected_headers = {}
+    expected_headers['content-type'] = 'application/json'
+
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
+
+    # Test whether the captured response is as we expected
+    refute_nil(result)
+    expected_body = JSON.parse(
+      '{"requestId":"9d2dee33-7803-485a-a2b1-2c7538e597ee","status":"SUCCESS",'\
+      '"data":[{"id":"78b5d7a3-bdba-43d7-9851-1c84fcddb782","userId":"281482b6'\
+      '-2c9a-4fd1-b3ea-1928edb40ef9","emaId":"NL-TNM-C00122045-K","evseId":"NL'\
+      '*TNM*E02003451*0","startedAt":"2015-08-19T11:20:27Z","stoppedAt":"2015-'\
+      '08-19T11:20:27Z","SessionState":{"status":"Started"},"lastUpdated":"202'\
+      '4-07-17T07:36:57.985998Z"}]}'
     )
     received_body = JSON.parse(@response_catcher.response.raw_body)
     assert(ComparisonHelper.match_body(expected_body, received_body))

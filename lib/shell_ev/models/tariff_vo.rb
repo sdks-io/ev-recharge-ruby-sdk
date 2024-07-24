@@ -21,7 +21,7 @@ module ShellEv
     # @return [Float]
     attr_accessor :per_k_wh
 
-    # ISO 4217 Curreny Code of the local currency.
+    # ISO 4217 Currency Code of the local currency.
     # @return [String]
     attr_accessor :currency
 
@@ -69,12 +69,8 @@ module ShellEv
       []
     end
 
-    def initialize(start_fee = SKIP,
-                   per_minute = SKIP,
-                   per_k_wh = SKIP,
-                   currency = SKIP,
-                   updated = SKIP,
-                   updated_by = SKIP,
+    def initialize(start_fee = SKIP, per_minute = SKIP, per_k_wh = SKIP,
+                   currency = SKIP, updated = SKIP, updated_by = SKIP,
                    structure = SKIP)
       @start_fee = start_fee unless start_fee == SKIP
       @per_minute = per_minute unless per_minute == SKIP

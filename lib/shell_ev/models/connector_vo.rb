@@ -36,7 +36,7 @@ module ShellEv
     # @return [TariffVO]
     attr_accessor :tariff
 
-    # ISO8601-compliant UTC datetime of the last update of the Connectors's data
+    # ISO8601-compliant UTC datetime of the last update of the Connector’s data
     # @return [String]
     attr_accessor :updated
 
@@ -83,14 +83,9 @@ module ShellEv
       []
     end
 
-    def initialize(uid = SKIP,
-                   external_id = SKIP,
-                   connector_type = SKIP,
-                   electrical_properties = SKIP,
-                   fixed_cable = SKIP,
-                   tariff = SKIP,
-                   updated = SKIP,
-                   updated_by = SKIP,
+    def initialize(uid = SKIP, external_id = SKIP, connector_type = SKIP,
+                   electrical_properties = SKIP, fixed_cable = SKIP,
+                   tariff = SKIP, updated = SKIP, updated_by = SKIP,
                    deleted = SKIP)
       @uid = uid unless uid == SKIP
       @external_id = external_id unless external_id == SKIP

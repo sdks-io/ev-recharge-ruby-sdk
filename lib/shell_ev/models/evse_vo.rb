@@ -82,14 +82,9 @@ module ShellEv
       []
     end
 
-    def initialize(uid = SKIP,
-                   external_id = SKIP,
-                   evse_id = SKIP,
-                   status = SKIP,
-                   connectors = SKIP,
-                   authorization_methods = SKIP,
-                   updated = SKIP,
-                   deleted = SKIP,
+    def initialize(uid = SKIP, external_id = SKIP, evse_id = SKIP,
+                   status = SKIP, connectors = SKIP,
+                   authorization_methods = SKIP, updated = SKIP, deleted = SKIP,
                    physical_reference = SKIP)
       @uid = uid unless uid == SKIP
       @external_id = external_id unless external_id == SKIP

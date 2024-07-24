@@ -9,7 +9,7 @@ module ShellEv
     SKIP = Object.new
     private_constant :SKIP
 
-    # Identifies the marker type. If it''s a `SingleLocationMarker`, then the
+    # Identifies the marker type. If it’s a `SingleLocationMarker`, then the
     # value is `SingleLocation`
     # @return [String]
     attr_accessor :marker_type
@@ -88,16 +88,10 @@ module ShellEv
       []
     end
 
-    def initialize(marker_type = nil,
-                   unique_key = SKIP,
-                   status = SKIP,
-                   coordinates = SKIP,
-                   evse_count = SKIP,
-                   max_power = SKIP,
-                   geo_hash = SKIP,
-                   location_uid = SKIP,
-                   authorization_methods = SKIP,
-                   operator_id = SKIP)
+    def initialize(marker_type = nil, unique_key = SKIP, status = SKIP,
+                   coordinates = SKIP, evse_count = SKIP, max_power = SKIP,
+                   geo_hash = SKIP, location_uid = SKIP,
+                   authorization_methods = SKIP, operator_id = SKIP)
       @marker_type = marker_type
       @unique_key = unique_key unless unique_key == SKIP
       @status = status unless status == SKIP

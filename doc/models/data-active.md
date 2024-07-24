@@ -15,23 +15,19 @@
 | `evse_id` | `String` | Optional | Electric Vehicle Supply Equipment Identifier. An EVSEID identifies a Charging Point. |
 | `started_at` | `DateTime` | Optional | When the session is started |
 | `stopped_at` | `DateTime` | Optional | When the session is stopped |
-| `session_state` | [`DataActiveSessionStateEnum`](../../doc/models/data-active-session-state-enum.md) | Optional | Describes the session state |
-| `session_code` | [`DataActiveSessionCodeEnum`](../../doc/models/data-active-session-code-enum.md) | Optional | Session code e.g InternalError<br>**Constraints**: *Minimum Length*: `7`, *Maximum Length*: `14` |
-| `session_message` | `String` | Optional | Session message |
+| `session_state` | [`ChargeRetrieveState`](../../doc/models/charge-retrieve-state.md) | Optional | - |
+| `last_updated` | `String` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "Id": "78b5d7a3-bdba-43d7-9851-1c84fcddb782",
-  "UserId": "281482b6-2c9a-4fd1-b3ea-1928edb40ef9",
-  "EmaId": "NL-TNM-C00122045-K",
-  "EvseId": "NL*TNM*E02003451*0",
-  "StartedAt": "08/19/2015 11:20:27",
-  "StoppedAt": "08/19/2015 11:20:27",
-  "SessionState": "start-requested",
-  "SessionCode": "EvseInUse",
-  "SessionMessage": "Evse in use"
+  "id": "78b5d7a3-bdba-43d7-9851-1c84fcddb782",
+  "userId": "281482b6-2c9a-4fd1-b3ea-1928edb40ef9",
+  "emaId": "NL-TNM-C00122045-K",
+  "evseId": "NL*TNM*E02003451*0",
+  "startedAt": "08/19/2015 11:20:27",
+  "stoppedAt": "08/19/2015 11:20:27"
 }
 ```
 

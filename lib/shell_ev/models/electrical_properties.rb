@@ -50,9 +50,7 @@ module ShellEv
       []
     end
 
-    def initialize(power_type = SKIP,
-                   voltage = SKIP,
-                   amperage = SKIP,
+    def initialize(power_type = SKIP, voltage = SKIP, amperage = SKIP,
                    max_electric_power = SKIP)
       @power_type = power_type unless power_type == SKIP
       @voltage = voltage unless voltage == SKIP

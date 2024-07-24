@@ -12,7 +12,7 @@ module ShellEv
     # rubocop:disable Lint/RedundantCopDisableDirective, Style/HashSyntax, Layout/FirstArgumentIndentation
     def self.union_types
       {
-        :MarkersResponse => OneOf.new(
+        :LocationMarker => OneOf.new(
           [
             LeafType.new(SingleLocationMarker, UnionTypeContext.new(
               discriminator_value: 'SingleLocation',
@@ -24,7 +24,8 @@ module ShellEv
             ))
           ],
           UnionTypeContext.new(
-            is_array: true
+            is_array: true,
+            is_optional: true
           )
         )
       }

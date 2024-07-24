@@ -6,8 +6,11 @@
 module ShellEv
   # An enum for SDK environments.
   class Environment
+    # PRODUCTION: Production
+    # ENVIRONMENT2: Test
     ENVIRONMENT = [
-      PRODUCTION = 'production'.freeze
+      PRODUCTION = 'production'.freeze,
+      ENVIRONMENT2 = 'environment2'.freeze
     ].freeze
   end
 
@@ -22,7 +25,7 @@ module ShellEv
   # are configured in this class.
   class Configuration < CoreLibrary::HttpClientConfiguration
     # The attribute readers for properties.
-    attr_reader :environment, :env, :client_credentials_auth_credentials
+    attr_reader :environment, :client_credentials_auth_credentials
 
     class << self
       attr_reader :environments
@@ -33,7 +36,7 @@ module ShellEv
       max_retries: 0, retry_interval: 1, backoff_factor: 2,
       retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
       retry_methods: %i[get put], http_callback: nil,
-      environment: Environment::PRODUCTION, env: EnvEnum::ENUM_APITESTSHELLCOM,
+      environment: Environment::PRODUCTION,
       client_credentials_auth_credentials: nil
     )
 
@@ -44,9 +47,6 @@ module ShellEv
 
       # Current API environment
       @environment = String(environment)
-
-      # This variable specifies the type of environment. Environments:   * `api` - Production   * `api-test` - UAT
-      @env = env
 
       # The object holding OAuth 2 Client Credentials Grant credentials
       @client_credentials_auth_credentials = client_credentials_auth_credentials
@@ -61,8 +61,7 @@ module ShellEv
     def clone_with(connection: nil, adapter: nil, timeout: nil,
                    max_retries: nil, retry_interval: nil, backoff_factor: nil,
                    retry_statuses: nil, retry_methods: nil, http_callback: nil,
-                   environment: nil, env: nil,
-                   client_credentials_auth_credentials: nil)
+                   environment: nil, client_credentials_auth_credentials: nil)
       connection ||= self.connection
       adapter ||= self.adapter
       timeout ||= self.timeout
@@ -73,7 +72,6 @@ module ShellEv
       retry_methods ||= self.retry_methods
       http_callback ||= self.http_callback
       environment ||= self.environment
-      env ||= self.env
       client_credentials_auth_credentials ||= client_credentials_auth_credentials
 
       Configuration.new(
@@ -81,7 +79,7 @@ module ShellEv
         max_retries: max_retries, retry_interval: retry_interval,
         backoff_factor: backoff_factor, retry_statuses: retry_statuses,
         retry_methods: retry_methods, http_callback: http_callback,
-        environment: environment, env: env,
+        environment: environment,
         client_credentials_auth_credentials: client_credentials_auth_credentials
       )
     end
@@ -90,7 +88,10 @@ module ShellEv
     # All the environments the SDK can run in.
     ENVIRONMENTS = {
       Environment::PRODUCTION => {
-        Server::DEFAULT => 'https://{env}'
+        Server::DEFAULT => 'https://api.shell.com'
+      },
+      Environment::ENVIRONMENT2 => {
+        Server::DEFAULT => 'https://api-test.shell.com'
       }
     }.freeze
 
@@ -99,12 +100,7 @@ module ShellEv
     # required.
     # @return [String] The base URI.
     def get_base_uri(server = Server::DEFAULT)
-      parameters = {
-        'env' => { 'value' => env, 'encode' => false }
-      }
-      APIHelper.append_url_with_template_parameters(
-        ENVIRONMENTS[environment][server], parameters
-      )
+      ENVIRONMENTS[environment][server].clone
     end
   end
 end

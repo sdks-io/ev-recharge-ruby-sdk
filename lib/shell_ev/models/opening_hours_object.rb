@@ -44,9 +44,7 @@ module ShellEv
       []
     end
 
-    def initialize(week_day = SKIP,
-                   start_time = SKIP,
-                   end_time = SKIP)
+    def initialize(week_day = SKIP, start_time = SKIP, end_time = SKIP)
       @week_day = week_day unless week_day == SKIP
       @start_time = start_time unless start_time == SKIP
       @end_time = end_time unless end_time == SKIP

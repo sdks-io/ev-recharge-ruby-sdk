@@ -50,9 +50,7 @@ module ShellEv
       []
     end
 
-    def initialize(street_and_number = SKIP,
-                   postal_code = SKIP,
-                   city = SKIP,
+    def initialize(street_and_number = SKIP, postal_code = SKIP, city = SKIP,
                    country = SKIP)
       @street_and_number = street_and_number unless street_and_number == SKIP
       @postal_code = postal_code unless postal_code == SKIP

@@ -16,13 +16,15 @@ module ShellEv
     # A mapping from model property names to API property names.
     def self.names
       @_hash = {} if @_hash.nil?
-      @_hash['session_id'] = 'SessionId'
+      @_hash['session_id'] = 'sessionId'
       @_hash
     end
 
     # An array for optional fields
     def self.optionals
-      []
+      %w[
+        session_id
+      ]
     end
 
     # An array for nullable fields
@@ -30,8 +32,8 @@ module ShellEv
       []
     end
 
-    def initialize(session_id = nil)
-      @session_id = session_id
+    def initialize(session_id = SKIP)
+      @session_id = session_id unless session_id == SKIP
     end
 
     # Creates an instance of the object from a hash.
@@ -39,7 +41,7 @@ module ShellEv
       return nil unless hash
 
       # Extract variables from the hash.
-      session_id = hash.key?('SessionId') ? hash['SessionId'] : nil
+      session_id = hash.key?('sessionId') ? hash['sessionId'] : SKIP
 
       # Create object from extracted values.
       InlineResponse202Data.new(session_id)

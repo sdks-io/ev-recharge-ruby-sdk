@@ -70,12 +70,8 @@ module ShellEv
       []
     end
 
-    def initialize(marker_type = nil,
-                   unique_key = SKIP,
-                   coordinates = SKIP,
-                   location_count = SKIP,
-                   evse_count = SKIP,
-                   max_power = SKIP,
+    def initialize(marker_type = nil, unique_key = SKIP, coordinates = SKIP,
+                   location_count = SKIP, evse_count = SKIP, max_power = SKIP,
                    geo_hash = SKIP)
       @marker_type = marker_type
       @unique_key = unique_key unless unique_key == SKIP

@@ -15,23 +15,27 @@ module ShellEv
 
     # Initialization constructor.
     def initialize(client_credentials_auth_credentials, config)
-      auth_params = {}
       @_o_auth_client_id = client_credentials_auth_credentials.o_auth_client_id unless
         client_credentials_auth_credentials.nil? || client_credentials_auth_credentials.o_auth_client_id.nil?
       @_o_auth_client_secret = client_credentials_auth_credentials.o_auth_client_secret unless
         client_credentials_auth_credentials.nil? || client_credentials_auth_credentials.o_auth_client_secret.nil?
       @_o_auth_token = client_credentials_auth_credentials.o_auth_token unless
         client_credentials_auth_credentials.nil? || client_credentials_auth_credentials.o_auth_token.nil?
+      @_o_auth_clock_skew = client_credentials_auth_credentials.o_auth_clock_skew unless
+        client_credentials_auth_credentials.nil? || client_credentials_auth_credentials.o_auth_clock_skew.nil?
+      @_o_auth_token_provider = client_credentials_auth_credentials.o_auth_token_provider unless
+        client_credentials_auth_credentials.nil? || client_credentials_auth_credentials.o_auth_token_provider.nil?
+      @_o_auth_on_token_update = client_credentials_auth_credentials.o_auth_on_token_update unless
+        client_credentials_auth_credentials.nil? || client_credentials_auth_credentials.o_auth_on_token_update.nil?
       @_o_auth_api = OAuthAuthorizationController.new(config)
-      auth_params['Authorization'] = "Bearer #{@_o_auth_token.access_token}" unless @_o_auth_token.nil?
-
-      super auth_params
+      super({})
     end
 
     # Validates the oAuth token.
     # @return [Boolean] true if the token is present and not expired.
     def valid
-      !@_o_auth_token.nil? && !token_expired?(@_o_auth_token)
+      @_o_auth_token = get_token_from_provider
+      @_o_auth_token.is_a?(OAuthToken) && !token_expired?(@_o_auth_token)
     end
 
     # Builds the basic auth header for endpoints in the OAuth Authorization Controller.
@@ -58,32 +62,72 @@ module ShellEv
     # @param [OAuthToken] token The oAuth token instance.
     # @return [Boolean] true if the token's expiry exist and also the token is expired, false otherwise.
     def token_expired?(token)
-      token.respond_to?('expiry') && AuthHelper.token_expired?(token.expiry)
+      token.respond_to?('expiry') && AuthHelper.token_expired?(token.expiry, @_o_auth_clock_skew)
+    end
+
+    def apply(http_request)
+      auth_params = { 'Authorization' => "Bearer #{@_o_auth_token.access_token}" }
+      AuthHelper.apply(auth_params, http_request.method(:add_header))
+    end
+
+    private
+
+    # This provides the OAuth Token from either the user configured callbacks or from default provider.
+    # @return [OAuthToken] The fetched oauth token.
+    def get_token_from_provider
+      return @_o_auth_token if @_o_auth_token && !token_expired?(@_o_auth_token)
+
+      if @_o_auth_token_provider
+        o_auth_token = @_o_auth_token_provider.call(@_o_auth_token, self)
+        @_o_auth_on_token_update&.call(o_auth_token)
+        return o_auth_token
+      end
+      begin
+        o_auth_token = fetch_token
+        @_o_auth_on_token_update&.call(o_auth_token)
+        o_auth_token
+      rescue ApiException
+        @_o_auth_token
+      end
     end
   end
 
   # Data class for ClientCredentialsAuthCredentials.
   class ClientCredentialsAuthCredentials
-    attr_reader :o_auth_client_id, :o_auth_client_secret, :o_auth_token
+    attr_reader :o_auth_client_id, :o_auth_client_secret, :o_auth_token,
+                :o_auth_token_provider, :o_auth_on_token_update,
+                :o_auth_clock_skew
 
-    def initialize(o_auth_client_id:, o_auth_client_secret:, o_auth_token: nil)
+    def initialize(o_auth_client_id:, o_auth_client_secret:, o_auth_token: nil,
+                   o_auth_token_provider: nil, o_auth_on_token_update: nil,
+                   o_auth_clock_skew: nil)
       raise ArgumentError, 'o_auth_client_id cannot be nil' if o_auth_client_id.nil?
       raise ArgumentError, 'o_auth_client_secret cannot be nil' if o_auth_client_secret.nil?
 
       @o_auth_client_id = o_auth_client_id
       @o_auth_client_secret = o_auth_client_secret
       @o_auth_token = o_auth_token
+      @o_auth_token_provider = o_auth_token_provider
+      @o_auth_on_token_update = o_auth_on_token_update
+      @o_auth_clock_skew = o_auth_clock_skew
     end
 
     def clone_with(o_auth_client_id: nil, o_auth_client_secret: nil,
-                   o_auth_token: nil)
+                   o_auth_token: nil, o_auth_token_provider: nil,
+                   o_auth_on_token_update: nil, o_auth_clock_skew: nil)
       o_auth_client_id ||= self.o_auth_client_id
       o_auth_client_secret ||= self.o_auth_client_secret
       o_auth_token ||= self.o_auth_token
+      o_auth_token_provider ||= self.o_auth_token_provider
+      o_auth_on_token_update ||= self.o_auth_on_token_update
+      o_auth_clock_skew ||= self.o_auth_clock_skew
 
       ClientCredentialsAuthCredentials.new(
         o_auth_client_id: o_auth_client_id,
-        o_auth_client_secret: o_auth_client_secret, o_auth_token: o_auth_token
+        o_auth_client_secret: o_auth_client_secret, o_auth_token: o_auth_token,
+        o_auth_token_provider: o_auth_token_provider,
+        o_auth_on_token_update: o_auth_on_token_update,
+        o_auth_clock_skew: o_auth_clock_skew
       )
     end
   end
