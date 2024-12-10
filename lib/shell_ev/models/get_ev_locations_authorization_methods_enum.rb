@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # getEVLocationsAuthorizationMethods.
+  # Filter by Locations that support the given Authorization Methods
   class GetEVLocationsAuthorizationMethodsEnum
     GET_EV_LOCATIONS_AUTHORIZATION_METHODS_ENUM = [
       # TODO: Write general description for NEWMOTIONAPP

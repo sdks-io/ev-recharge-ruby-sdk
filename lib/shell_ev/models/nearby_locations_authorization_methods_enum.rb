@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # nearbyLocationsAuthorizationMethods.
+  # Filter by Locations that support the given Authorization Methods
   class NearbyLocationsAuthorizationMethodsEnum
     NEARBY_LOCATIONS_AUTHORIZATION_METHODS_ENUM = [
       # TODO: Write general description for NEWMOTIONAPP

@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # locationsMarkersConnectorTypes.
+  # Filter by Locations that have Connectors with the set of Connector Types
   class LocationsMarkersConnectorTypesEnum
     LOCATIONS_MARKERS_CONNECTOR_TYPES_ENUM = [
       # TODO: Write general description for AVCON

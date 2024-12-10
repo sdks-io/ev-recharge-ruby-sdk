@@ -15,12 +15,12 @@ module ShellEv
     # 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4
     # hyphens) <br>
     # @param [ChargesessionStartBody] body Optional parameter: Example:
-    # @return [InlineResponse202] response from the API call
+    # @return [InlineResponse202] response from the API call.
     def start(request_id,
               body: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
-                                     '/ev/v1/charge-session/start',
+                                     '/charge-session/start',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .header_param(new_parameter('application/json', key: 'Content-Type'))
@@ -66,12 +66,12 @@ module ShellEv
     # 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4
     # hyphens) <br>
     # @param [String] session_id Required parameter: Session Id
-    # @return [InlineResponse2021] response from the API call
+    # @return [InlineResponse2021] response from the API call.
     def stop(request_id,
              session_id)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::POST,
-                                     '/ev/v1/charge-session/stop',
+                                     '/charge-session/stop',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(session_id, key: 'sessionId'))
@@ -114,12 +114,12 @@ module ShellEv
     # 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4
     # hyphens) <br>
     # @param [String] session_id Required parameter: Session Id
-    # @return [GetChargeSessionRetrieveResponse200Json] response from the API call
+    # @return [GetChargeSessionRetrieveResponse200Json] response from the API call.
     def get_charge_session_retrieve(request_id,
                                     session_id)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
-                                     '/ev/v1/charge-session/retrieve',
+                                     '/charge-session/retrieve',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(session_id, key: 'sessionId'))
@@ -163,12 +163,12 @@ module ShellEv
     # hyphens) <br>
     # @param [String] ema_id Required parameter: Emobility Account
     # Identifier(Ema-ID)
-    # @return [ActiveResponse200Json] response from the API call
+    # @return [ActiveResponse200Json] response from the API call.
     def active(request_id,
                ema_id)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
-                                     '/ev/v1/charge-session/active',
+                                     '/charge-session/active',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(ema_id, key: 'emaId'))

@@ -14,11 +14,13 @@ module ShellEv
     # @return [UUID | String]
     attr_accessor :request_id
 
-    # Indicates overall status of the request
-    # @return [InlineResponse202StatusEnum]
+    # Mandatory UUID (according to RFC 4122 standards) for requests and
+    # responses. This will be played back in the response from the request.
+    # @return [GetChargeSessionRetrieveResponse200JsonStatusEnum]
     attr_accessor :status
 
-    # Indicates overall status of the request
+    # Mandatory UUID (according to RFC 4122 standards) for requests and
+    # responses. This will be played back in the response from the request.
     # @return [Array[InlineResponse202Data]]
     attr_accessor :data
 

@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # nearbyLocationsConnectorTypes.
+  # Filter by Locations that have Connectors with these Connector Types
   class NearbyLocationsConnectorTypesEnum
     NEARBY_LOCATIONS_CONNECTOR_TYPES_ENUM = [
       # TODO: Write general description for AVCON

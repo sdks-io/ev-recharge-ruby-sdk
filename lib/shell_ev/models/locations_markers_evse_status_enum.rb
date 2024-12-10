@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # locationsMarkersEvseStatus.
+  # Filter by Locations that have the given status
   class LocationsMarkersEvseStatusEnum
     LOCATIONS_MARKERS_EVSE_STATUS_ENUM = [
       # TODO: Write general description for AVAILABLE

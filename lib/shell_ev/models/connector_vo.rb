@@ -19,7 +19,8 @@ module ShellEv
     # @return [String]
     attr_accessor :external_id
 
-    # Type of the connector in the EVSE unit.
+    # Identifier of the Evse as given by the Operator, unique for the containing
+    # EVSE'
     # @return [ConnectorVOConnectorTypeEnum]
     attr_accessor :connector_type
 
@@ -32,15 +33,16 @@ module ShellEv
     # @return [TrueClass | FalseClass]
     attr_accessor :fixed_cable
 
-    # Tariff details for charging on this Connector
-    # @return [TariffVO]
+    # Indicates whether Connector has a fixed cable attached. False by default
+    # (not sent in this case)
+    # @return [Tariff]
     attr_accessor :tariff
 
     # ISO8601-compliant UTC datetime of the last update of the Connector’s data
     # @return [String]
     attr_accessor :updated
 
-    # Source of the last update
+    # ISO8601-compliant UTC datetime of the last update of the Connector’s data
     # @return [ConnectorVOUpdatedByEnum]
     attr_accessor :updated_by
 
@@ -109,7 +111,7 @@ module ShellEv
       electrical_properties = ElectricalProperties.from_hash(hash['electricalProperties']) if
         hash['electricalProperties']
       fixed_cable = hash.key?('fixedCable') ? hash['fixedCable'] : SKIP
-      tariff = TariffVO.from_hash(hash['tariff']) if hash['tariff']
+      tariff = Tariff.from_hash(hash['tariff']) if hash['tariff']
       updated = hash.key?('updated') ? hash['updated'] : SKIP
       updated_by = hash.key?('updatedBy') ? hash['updatedBy'] : SKIP
       deleted = hash.key?('deleted') ? hash['deleted'] : SKIP

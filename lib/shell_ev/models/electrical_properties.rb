@@ -9,7 +9,7 @@ module ShellEv
     SKIP = Object.new
     private_constant :SKIP
 
-    # Power Type used in this connector.
+    # TODO: Write general description for this method
     # @return [ElectricalPropertiesPowerTypeEnum]
     attr_accessor :power_type
 

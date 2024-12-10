@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # getEVLocationsEvseStatus.
+  # Filter by Locations that have the given status
   class GetEVLocationsEvseStatusEnum
     GET_EV_LOCATIONS_EVSE_STATUS_ENUM = [
       # TODO: Write general description for AVAILABLE

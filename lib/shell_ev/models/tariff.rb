@@ -4,8 +4,8 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # Tariff details for charging on this Connector
-  class TariffVO < BaseModel
+  # Tariff Model.
+  class Tariff < BaseModel
     SKIP = Object.new
     private_constant :SKIP
 
@@ -95,13 +95,13 @@ module ShellEv
       structure = hash.key?('structure') ? hash['structure'] : SKIP
 
       # Create object from extracted values.
-      TariffVO.new(start_fee,
-                   per_minute,
-                   per_k_wh,
-                   currency,
-                   updated,
-                   updated_by,
-                   structure)
+      Tariff.new(start_fee,
+                 per_minute,
+                 per_k_wh,
+                 currency,
+                 updated,
+                 updated_by,
+                 structure)
     end
   end
 end

@@ -18,8 +18,7 @@ module ShellEv
     # @return [String]
     attr_accessor :unique_key
 
-    # Minimum of all status values in the Marker, e.g. if at least one Evse in
-    # the Marker is available, the value will be available
+    # Uniquely identifies the marker object
     # @return [SingleLocationMarkerStatusEnum]
     attr_accessor :status
 

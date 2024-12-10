@@ -58,6 +58,7 @@ require_relative 'shell_ev/models/charge_error'
 require_relative 'shell_ev/models/data_active'
 require_relative 'shell_ev/models/get_charge_session_retrieve_response200_json'
 require_relative 'shell_ev/models/active_response200_json'
+require_relative 'shell_ev/models/tariff'
 require_relative 'shell_ev/models/o_auth_token'
 require_relative 'shell_ev/models/' \
                  'single_location_marker_authorization_methods_items_enum'

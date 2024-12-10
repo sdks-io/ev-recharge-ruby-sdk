@@ -57,7 +57,7 @@ module ShellEv
     # @param [Array[String]] exclude_country Optional parameter: Filter by
     # Locations that are not in one of the given countries (specified using ISO
     # 3166-1 alpha-3 codes)
-    # @return [Response] response from the API call
+    # @return [Response] response from the API call.
     def get_ev_locations(request_id,
                          evse_status: nil,
                          connector_types: nil,
@@ -74,7 +74,7 @@ module ShellEv
                          exclude_country: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
-                                     '/locations/v1/ev',
+                                     '/locations',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(evse_status, key: 'evseStatus'))
@@ -137,14 +137,14 @@ module ShellEv
     # wish to see locations and tariffs for
     # @param [String] since Optional parameter: to get the locations modified
     # after a date
-    # @return [Response] response from the API call
+    # @return [Response] response from the API call.
     def ev_locations_by_id(request_id,
                            id,
                            provider_id: nil,
                            since: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
-                                     '/locations/v1/ev/{id}',
+                                     '/locations/{id}',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .template_param(new_parameter(id, key: 'id')
@@ -216,14 +216,14 @@ module ShellEv
     # given by the Operator, unique for that Operator
     # @param [String] operator_name Optional parameter: Filter by Locations that
     # have the given operator
-    # @param [NearbyLocationsEvseStatusEnum] evse_status Optional parameter:
+    # @param [GetEVLocationsEvseStatusEnum] evse_status Optional parameter:
     # Filter by Locations that have the given status
     # @param [NearbyLocationsConnectorTypesEnum] connector_types Optional
     # parameter: Filter by Locations that have Connectors with these Connector
     # Types
     # @param [Float] connector_min_power Optional parameter: Filter by Locations
     # that have a Connector with at least this power output (in kW)
-    # @param [NearbyLocationsAuthorizationMethodsEnum] authorization_methods
+    # @param [GetEVLocationsAuthorizationMethodsEnum] authorization_methods
     # Optional parameter: Filter by Locations that support the given
     # Authorization Methods
     # @param [TrueClass | FalseClass] with_operator_name Optional parameter:
@@ -238,7 +238,7 @@ module ShellEv
     # @param [Array[String]] exclude_country Optional parameter: Filter by
     # Locations that are not in one of the given countries (specified using ISO
     # 3166-1 alpha-3 codes)
-    # @return [Response] response from the API call
+    # @return [Response] response from the API call.
     def nearby_locations(request_id,
                          latitude,
                          longitude,
@@ -257,7 +257,7 @@ module ShellEv
                          exclude_country: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
-                                     '/locations/v1/ev/nearby',
+                                     '/locations/nearby',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(latitude, key: 'latitude'))
@@ -330,14 +330,14 @@ module ShellEv
     # get the Shell Recharge Locations
     # @param [String] zoom Required parameter: Zoom level to show ex: (1: World,
     # 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings)
-    # @param [LocationsMarkersEvseStatusEnum] evse_status Optional parameter:
+    # @param [GetEVLocationsEvseStatusEnum] evse_status Optional parameter:
     # Filter by Locations that have the given status
-    # @param [LocationsMarkersConnectorTypesEnum] connector_types Optional
+    # @param [GetEVLocationsConnectorTypesEnum] connector_types Optional
     # parameter: Filter by Locations that have Connectors with the set of
     # Connector Types
     # @param [Float] connector_min_power Optional parameter: Filter by Locations
     # that have a Connector with at least this power output (in kW)
-    # @param [LocationsMarkersAuthorizationMethodsEnum] authorization_methods
+    # @param [GetEVLocationsAuthorizationMethodsEnum] authorization_methods
     # Optional parameter: Filter by Locations that support the given
     # Authorization Methods
     # @param [TrueClass | FalseClass] with_operator_name Optional parameter:
@@ -362,7 +362,7 @@ module ShellEv
     # @param [Array[String]] exclude_country Optional parameter: Filter by
     # Locations that are not in one of the given countries (specified using ISO
     # 3166-1 alpha-3 codes)
-    # @return [SingleLocationMarkerResponse] response from the API call
+    # @return [SingleLocationMarkerResponse] response from the API call.
     def locations_markers(request_id,
                           west,
                           south,
@@ -383,7 +383,7 @@ module ShellEv
                           exclude_country: nil)
       new_api_call_builder
         .request(new_request_builder(HttpMethodEnum::GET,
-                                     '/locations/v1/ev/markers',
+                                     '/locations/markers',
                                      Server::DEFAULT)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(west, key: 'west'))

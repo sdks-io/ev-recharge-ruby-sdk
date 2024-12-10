@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # getEVLocationsConnectorTypes.
+  # Filter by Locations that have Connectors with the set of Connector Types
   class GetEVLocationsConnectorTypesEnum
     GET_EV_LOCATIONS_CONNECTOR_TYPES_ENUM = [
       # TODO: Write general description for AVCON

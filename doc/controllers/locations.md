@@ -59,8 +59,8 @@ def get_ev_locations(request_id,
 | `evse_id` | `String` | Query, Optional | optional Standard EVSE (Electric Vehicle Supply Equipment) Id identifier (ISO-IEC-15118) |
 | `location_external_id` | `String` | Query, Optional | Filter by Locations with the given externalId. (Unique Location externalID provided by Shell Recharge) |
 | `evse_external_id` | `String` | Query, Optional | Filter by Locations that have an Evse with the given External Id. (Unique individual EVSE externalID provided by Shell Recharge) |
-| `page_number` | `Integer` | Query, Optional | Restrict the response list by providing a specific set of page Number. Set perPage parameter also when page Number is used. |
-| `per_page` | `Integer` | Query, Optional | Restrict the number of sites in response per page. |
+| `page_number` | `Integer` | Query, Optional | Restrict the response list by providing a specific set of page Number. Set perPage parameter also when page Number is used.<br>**Constraints**: `>= 1` |
+| `per_page` | `Integer` | Query, Optional | Restrict the number of sites in response per page.<br>**Constraints**: `<= 500` |
 | `updated_since` | `String` | Query, Optional | ZonedDateTime as string |
 | `country` | `Array<String>` | Query, Optional | Filter by Locations that are at least in one of the given countries (specified using ISO 3166-1 alpha-3 codes) |
 | `exclude_country` | `Array<String>` | Query, Optional | Filter by Locations that are not in one of the given countries (specified using ISO 3166-1 alpha-3 codes) |
@@ -191,17 +191,17 @@ def nearby_locations(request_id,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `request_id` | `UUID \| String` | Header, Required | RequestId must be unique identifier value that can be used by the consumer to correlate each request /response .<br>Format.<br> Its canonical textual representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16) digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4 hyphens) <br> |
-| `latitude` | `Float` | Query, Required | Latitude to get Shell Recharge Locations nearby |
-| `longitude` | `Float` | Query, Required | Longitude to get Shell Recharge Locations nearby |
-| `limit` | `Float` | Query, Optional | Maximum number of Locations to retrieve |
+| `latitude` | `Float` | Query, Required | Latitude to get Shell Recharge Locations nearby<br>**Constraints**: `>= -90`, `<= 90` |
+| `longitude` | `Float` | Query, Required | Longitude to get Shell Recharge Locations nearby<br>**Constraints**: `>= -180`, `<= 180` |
+| `limit` | `Float` | Query, Optional | Maximum number of Locations to retrieve<br>**Default**: `25`<br>**Constraints**: `<= 100` |
 | `location_external_id` | `String` | Query, Optional | Filter by Locations with the given externalId Identifier as given by the Shell Recharge Operator, unique for that Operator |
 | `evse_id` | `String` | Query, Optional | Filter by Locations that have an Evse with the given Evse Id |
 | `evse_external_id` | `String` | Query, Optional | Filter by Locations that have an Evse with the given External Id Identifier of the Evse as given by the Operator, unique for that Operator |
 | `operator_name` | `String` | Query, Optional | Filter by Locations that have the given operator |
-| `evse_status` | [`NearbyLocationsEvseStatusEnum`](../../doc/models/nearby-locations-evse-status-enum.md) | Query, Optional | Filter by Locations that have the given status |
+| `evse_status` | [`GetEVLocationsEvseStatusEnum`](../../doc/models/get-ev-locations-evse-status-enum.md) | Query, Optional | Filter by Locations that have the given status |
 | `connector_types` | [`NearbyLocationsConnectorTypesEnum`](../../doc/models/nearby-locations-connector-types-enum.md) | Query, Optional | Filter by Locations that have Connectors with these Connector Types |
 | `connector_min_power` | `Float` | Query, Optional | Filter by Locations that have a Connector with at least this power output (in kW) |
-| `authorization_methods` | [`NearbyLocationsAuthorizationMethodsEnum`](../../doc/models/nearby-locations-authorization-methods-enum.md) | Query, Optional | Filter by Locations that support the given Authorization Methods |
+| `authorization_methods` | [`GetEVLocationsAuthorizationMethodsEnum`](../../doc/models/get-ev-locations-authorization-methods-enum.md) | Query, Optional | Filter by Locations that support the given Authorization Methods |
 | `with_operator_name` | `TrueClass \| FalseClass` | Query, Optional | Return operator name in marker object (only for marker type Single ChargePoint) |
 | `with_max_power` | `TrueClass \| FalseClass` | Query, Optional | Return maximum power in kW across all locations grouped in this marker (disregarding availability) |
 | `country` | `Array<String>` | Query, Optional | Filter by Locations that are at least in one of the given countries (specified using ISO 3166-1 alpha-3 codes) |
@@ -288,15 +288,15 @@ def locations_markers(request_id,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `request_id` | `UUID \| String` | Header, Required | RequestId must be unique identifier value that can be used by the consumer to correlate each request /response .<br>Format.<br> Its canonical textual representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16) digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32 hexadecimal characters and 4 hyphens) <br> |
-| `west` | `Float` | Query, Required | Longitude of the western bound to get the Shell Recharge Locations |
-| `south` | `Float` | Query, Required | Latitude of the southern bound to get the Shell Recharge Locations |
-| `east` | `Float` | Query, Required | Longitude of the eastern bound to get the Shell Recharge Locations |
-| `north` | `Float` | Query, Required | Latitude of the northern bound to get the Shell Recharge Locations |
+| `west` | `Float` | Query, Required | Longitude of the western bound to get the Shell Recharge Locations<br>**Constraints**: `>= -180`, `<= 180` |
+| `south` | `Float` | Query, Required | Latitude of the southern bound to get the Shell Recharge Locations<br>**Constraints**: `>= -90`, `<= 90` |
+| `east` | `Float` | Query, Required | Longitude of the eastern bound to get the Shell Recharge Locations<br>**Constraints**: `>= -180`, `<= 180` |
+| `north` | `Float` | Query, Required | Latitude of the northern bound to get the Shell Recharge Locations<br>**Constraints**: `>= -90`, `<= 90` |
 | `zoom` | `String` | Query, Required | Zoom level to show ex: (1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings) |
-| `evse_status` | [`LocationsMarkersEvseStatusEnum`](../../doc/models/locations-markers-evse-status-enum.md) | Query, Optional | Filter by Locations that have the given status |
-| `connector_types` | [`LocationsMarkersConnectorTypesEnum`](../../doc/models/locations-markers-connector-types-enum.md) | Query, Optional | Filter by Locations that have Connectors with the set of Connector Types |
+| `evse_status` | [`GetEVLocationsEvseStatusEnum`](../../doc/models/get-ev-locations-evse-status-enum.md) | Query, Optional | Filter by Locations that have the given status |
+| `connector_types` | [`GetEVLocationsConnectorTypesEnum`](../../doc/models/get-ev-locations-connector-types-enum.md) | Query, Optional | Filter by Locations that have Connectors with the set of Connector Types |
 | `connector_min_power` | `Float` | Query, Optional | Filter by Locations that have a Connector with at least this power output (in kW) |
-| `authorization_methods` | [`LocationsMarkersAuthorizationMethodsEnum`](../../doc/models/locations-markers-authorization-methods-enum.md) | Query, Optional | Filter by Locations that support the given Authorization Methods |
+| `authorization_methods` | [`GetEVLocationsAuthorizationMethodsEnum`](../../doc/models/get-ev-locations-authorization-methods-enum.md) | Query, Optional | Filter by Locations that support the given Authorization Methods |
 | `with_operator_name` | `TrueClass \| FalseClass` | Query, Optional | Return operator name in marker object (only for marker type SingleChargePoint) |
 | `with_max_power` | `TrueClass \| FalseClass` | Query, Optional | Return maximum power in kW across all locations grouped in this marker (disregarding availability) |
 | `location_external_id` | `String` | Query, Optional | Filter by Locations with the given externalId. (Unique Location externalID provided by Shell Recharge) |

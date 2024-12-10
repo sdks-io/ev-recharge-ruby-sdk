@@ -9,7 +9,7 @@ module ShellEv
     SKIP = Object.new
     private_constant :SKIP
 
-    # 3 letter day of the week
+    # TODO: Write general description for this method
     # @return [OpeningHoursObjectWeekDayEnum]
     attr_accessor :week_day
 

@@ -4,7 +4,7 @@
 # ( https://apimatic.io ).
 
 module ShellEv
-  # nearbyLocationsEvseStatus.
+  # Filter by Locations that have the given status
   class NearbyLocationsEvseStatusEnum
     NEARBY_LOCATIONS_EVSE_STATUS_ENUM = [
       # TODO: Write general description for AVAILABLE

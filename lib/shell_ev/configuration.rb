@@ -6,8 +6,8 @@
 module ShellEv
   # An enum for SDK environments.
   class Environment
-    # PRODUCTION: Production
-    # ENVIRONMENT2: Test
+    # PRODUCTION: Production Server
+    # ENVIRONMENT2: Test Server
     ENVIRONMENT = [
       PRODUCTION = 'production'.freeze,
       ENVIRONMENT2 = 'environment2'.freeze
@@ -17,7 +17,8 @@ module ShellEv
   # An enum for API servers.
   class Server
     SERVER = [
-      DEFAULT = 'default'.freeze
+      DEFAULT = 'default'.freeze,
+      ACCESS_TOKEN_SERVER = 'access token server'.freeze
     ].freeze
   end
 
@@ -143,10 +144,12 @@ module ShellEv
     # All the environments the SDK can run in.
     ENVIRONMENTS = {
       Environment::PRODUCTION => {
-        Server::DEFAULT => 'https://api.shell.com'
+        Server::DEFAULT => 'https://api.shell.com/ev/v1',
+        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v1/oauth'
       },
       Environment::ENVIRONMENT2 => {
-        Server::DEFAULT => 'https://api-test.shell.com'
+        Server::DEFAULT => 'https://api-test.shell.com/ev/v1',
+        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v1/oauth'
       }
     }.freeze
 
