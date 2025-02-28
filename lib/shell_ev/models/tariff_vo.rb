@@ -103,5 +103,22 @@ module ShellEv
                    updated_by,
                    structure)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} start_fee: #{@start_fee}, per_minute: #{@per_minute}, per_k_wh:"\
+      " #{@per_k_wh}, currency: #{@currency}, updated: #{@updated}, updated_by: #{@updated_by},"\
+      " structure: #{@structure}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} start_fee: #{@start_fee.inspect}, per_minute: #{@per_minute.inspect},"\
+      " per_k_wh: #{@per_k_wh.inspect}, currency: #{@currency.inspect}, updated:"\
+      " #{@updated.inspect}, updated_by: #{@updated_by.inspect}, structure:"\
+      " #{@structure.inspect}>"
+    end
   end
 end

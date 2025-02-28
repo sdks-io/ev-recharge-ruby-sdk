@@ -75,5 +75,19 @@ module ShellEv
                                amperage,
                                max_electric_power)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} power_type: #{@power_type}, voltage: #{@voltage}, amperage: #{@amperage},"\
+      " max_electric_power: #{@max_electric_power}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} power_type: #{@power_type.inspect}, voltage: #{@voltage.inspect}, amperage:"\
+      " #{@amperage.inspect}, max_electric_power: #{@max_electric_power.inspect}>"
+    end
   end
 end

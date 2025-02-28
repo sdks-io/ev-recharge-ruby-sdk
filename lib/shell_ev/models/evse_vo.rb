@@ -134,5 +134,22 @@ module ShellEv
                  deleted,
                  physical_reference)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} uid: #{@uid}, external_id: #{@external_id}, evse_id: #{@evse_id}, status:"\
+      " #{@status}, connectors: #{@connectors}, authorization_methods: #{@authorization_methods},"\
+      " updated: #{@updated}, deleted: #{@deleted}, physical_reference: #{@physical_reference}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} uid: #{@uid.inspect}, external_id: #{@external_id.inspect}, evse_id:"\
+      " #{@evse_id.inspect}, status: #{@status.inspect}, connectors: #{@connectors.inspect},"\
+      " authorization_methods: #{@authorization_methods.inspect}, updated: #{@updated.inspect},"\
+      " deleted: #{@deleted.inspect}, physical_reference: #{@physical_reference.inspect}>"
+    end
   end
 end

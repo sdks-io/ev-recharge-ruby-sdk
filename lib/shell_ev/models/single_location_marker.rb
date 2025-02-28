@@ -146,5 +146,24 @@ module ShellEv
       APIHelper.valid_type?(value['markerType'],
                             ->(val) { val.instance_of? String })
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} marker_type: #{@marker_type}, unique_key: #{@unique_key}, status:"\
+      " #{@status}, coordinates: #{@coordinates}, evse_count: #{@evse_count}, max_power:"\
+      " #{@max_power}, geo_hash: #{@geo_hash}, location_uid: #{@location_uid},"\
+      " authorization_methods: #{@authorization_methods}, operator_id: #{@operator_id}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} marker_type: #{@marker_type.inspect}, unique_key: #{@unique_key.inspect},"\
+      " status: #{@status.inspect}, coordinates: #{@coordinates.inspect}, evse_count:"\
+      " #{@evse_count.inspect}, max_power: #{@max_power.inspect}, geo_hash: #{@geo_hash.inspect},"\
+      " location_uid: #{@location_uid.inspect}, authorization_methods:"\
+      " #{@authorization_methods.inspect}, operator_id: #{@operator_id.inspect}>"
+    end
   end
 end

@@ -64,5 +64,19 @@ module ShellEv
                              start_time,
                              end_time)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} week_day: #{@week_day}, start_time: #{@start_time}, end_time:"\
+      " #{@end_time}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} week_day: #{@week_day.inspect}, start_time: #{@start_time.inspect},"\
+      " end_time: #{@end_time.inspect}>"
+    end
   end
 end

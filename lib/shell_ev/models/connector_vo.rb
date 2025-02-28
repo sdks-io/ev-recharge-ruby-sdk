@@ -127,5 +127,23 @@ module ShellEv
                       updated_by,
                       deleted)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} uid: #{@uid}, external_id: #{@external_id}, connector_type:"\
+      " #{@connector_type}, electrical_properties: #{@electrical_properties}, fixed_cable:"\
+      " #{@fixed_cable}, tariff: #{@tariff}, updated: #{@updated}, updated_by: #{@updated_by},"\
+      " deleted: #{@deleted}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} uid: #{@uid.inspect}, external_id: #{@external_id.inspect}, connector_type:"\
+      " #{@connector_type.inspect}, electrical_properties: #{@electrical_properties.inspect},"\
+      " fixed_cable: #{@fixed_cable.inspect}, tariff: #{@tariff.inspect}, updated:"\
+      " #{@updated.inspect}, updated_by: #{@updated_by.inspect}, deleted: #{@deleted.inspect}>"
+    end
   end
 end

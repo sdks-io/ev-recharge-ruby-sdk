@@ -130,5 +130,22 @@ module ShellEv
     def to_custom_stopped_at
       DateTimeHelper.to_rfc3339(stopped_at)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} id: #{@id}, user_id: #{@user_id}, ema_id: #{@ema_id}, evse_id: #{@evse_id},"\
+      " last_updated: #{@last_updated}, started_at: #{@started_at}, stopped_at: #{@stopped_at},"\
+      " session_state: #{@session_state}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} id: #{@id.inspect}, user_id: #{@user_id.inspect}, ema_id:"\
+      " #{@ema_id.inspect}, evse_id: #{@evse_id.inspect}, last_updated: #{@last_updated.inspect},"\
+      " started_at: #{@started_at.inspect}, stopped_at: #{@stopped_at.inspect}, session_state:"\
+      " #{@session_state.inspect}>"
+    end
   end
 end

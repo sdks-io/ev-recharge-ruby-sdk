@@ -75,5 +75,19 @@ module ShellEv
                   city,
                   country)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} street_and_number: #{@street_and_number}, postal_code: #{@postal_code},"\
+      " city: #{@city}, country: #{@country}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} street_and_number: #{@street_and_number.inspect}, postal_code:"\
+      " #{@postal_code.inspect}, city: #{@city.inspect}, country: #{@country.inspect}>"
+    end
   end
 end

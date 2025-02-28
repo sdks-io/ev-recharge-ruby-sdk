@@ -145,11 +145,11 @@ module ShellEv
     ENVIRONMENTS = {
       Environment::PRODUCTION => {
         Server::DEFAULT => 'https://api.shell.com/ev/v1',
-        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v1/oauth'
+        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
       },
       Environment::ENVIRONMENT2 => {
         Server::DEFAULT => 'https://api-test.shell.com/ev/v1',
-        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v1/oauth'
+        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
       }
     }.freeze
 

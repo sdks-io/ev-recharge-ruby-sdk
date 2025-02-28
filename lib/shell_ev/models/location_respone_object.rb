@@ -161,5 +161,24 @@ module ShellEv
                                 operator_comment,
                                 location_type)
     end
+
+    # Provides a human-readable string representation of the object.
+    def to_s
+      class_name = self.class.name.split('::').last
+      "<#{class_name} uid: #{@uid}, external_id: #{@external_id}, coordinates: #{@coordinates},"\
+      " operator_name: #{@operator_name}, address: #{@address}, accessibility: #{@accessibility},"\
+      " evses: #{@evses}, opening_hours: #{@opening_hours}, updated: #{@updated},"\
+      " operator_comment: #{@operator_comment}, location_type: #{@location_type}>"
+    end
+
+    # Provides a debugging-friendly string with detailed object information.
+    def inspect
+      class_name = self.class.name.split('::').last
+      "<#{class_name} uid: #{@uid.inspect}, external_id: #{@external_id.inspect}, coordinates:"\
+      " #{@coordinates.inspect}, operator_name: #{@operator_name.inspect}, address:"\
+      " #{@address.inspect}, accessibility: #{@accessibility.inspect}, evses: #{@evses.inspect},"\
+      " opening_hours: #{@opening_hours.inspect}, updated: #{@updated.inspect}, operator_comment:"\
+      " #{@operator_comment.inspect}, location_type: #{@location_type.inspect}>"
+    end
   end
 end

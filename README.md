@@ -28,16 +28,16 @@ Go to the Shell Developer Portal: [https://developer.shell.com](https://develope
 Install the gem from the command line:
 
 ```bash
-gem install ev-recharge-sdk -v 1.3.0
+gem install ev-recharge-sdk -v 1.4.0
 ```
 
 Or add the gem to your Gemfile and run `bundle`:
 
 ```ruby
-gem 'ev-recharge-sdk', '1.3.0'
+gem 'ev-recharge-sdk', '1.4.0'
 ```
 
-For additional gem details, see the [RubyGems page for the ev-recharge-sdk gem](https://rubygems.org/gems/ev-recharge-sdk/versions/1.3.0).
+For additional gem details, see the [RubyGems page for the ev-recharge-sdk gem](https://rubygems.org/gems/ev-recharge-sdk/versions/1.4.0).
 
 ## Test the SDK
 
@@ -49,7 +49,7 @@ rake
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
@@ -65,7 +65,7 @@ The following parameters are configurable for the API Client:
 | `retry_statuses` | `Array` | A list of HTTP statuses to retry. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
 | `retry_methods` | `Array` | A list of HTTP methods to retry. <br> **Default: %i[get put]** |
 | `http_callback` | `HttpCallBack` | The Http CallBack allows defining callables for pre and post API calls. |
-| `client_credentials_auth_credentials` | [`ClientCredentialsAuthCredentials`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for OAuth 2 Client Credentials Grant |
+| `client_credentials_auth_credentials` | [`ClientCredentialsAuthCredentials`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for OAuth 2 Client Credentials Grant |
 
 The API client can be initialized as follows:
 
@@ -94,16 +94,16 @@ The SDK can be configured to use a different environment for making API calls. A
 
 This API uses the following authentication schemes.
 
-* [`BearerAuth (OAuth 2 Client Credentials Grant)`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/auth/oauth-2-client-credentials-grant.md)
+* [`BearerAuth (OAuth 2 Client Credentials Grant)`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/auth/oauth-2-client-credentials-grant.md)
 
 ## List of APIs
 
-* [Locations](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/controllers/locations.md)
-* [Charging](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/controllers/charging.md)
+* [Locations](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/controllers/locations.md)
+* [Charging](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/controllers/charging.md)
 
 ## Classes Documentation
 
-* [Utility Classes](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/utility-classes.md)
-* [HttpResponse](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/http-response.md)
-* [HttpRequest](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.3.0/doc/http-request.md)
+* [Utility Classes](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/utility-classes.md)
+* [HttpResponse](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/http-response.md)
+* [HttpRequest](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/1.4.0/doc/http-request.md)
 
