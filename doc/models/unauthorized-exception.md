@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `request_id` | `String` | Optional | requestId or correlation id of the message |
 | `status` | `String` | Optional | Status of the request |
-| `errors` | [`Array<UnauthorizedErrMsg>`](../../doc/models/unauthorized-err-msg.md) | Optional | Exception details of the error |
+| `errors` | [`Array[UnauthorizedErrMsg]`](../../doc/models/unauthorized-err-msg.md) | Optional | Exception details of the error |
 
 ## Example (as JSON)
 

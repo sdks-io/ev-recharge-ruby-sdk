@@ -11,8 +11,8 @@
 |  --- | --- | --- | --- |
 | `request_id` | `String` | Optional | requestId is unique identifier value that is attached to requests and messages that allow reference to a particular transaction or event chain. |
 | `status` | `String` | Optional | Status of the request |
-| `errors` | [`Array<InternalErrorObject>`](../../doc/models/internal-error-object.md) | Optional | Exception details of the error |
-| `details` | `Array<String>` | Optional | - |
+| `errors` | [`Array[InternalErrorObject]`](../../doc/models/internal-error-object.md) | Optional | Exception details of the error |
+| `details` | `Array[String]` | Optional | - |
 
 ## Example (as JSON)
 

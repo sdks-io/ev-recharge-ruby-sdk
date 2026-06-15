@@ -13,7 +13,7 @@ Requested resource path not available it will provides the error in OpenAPI spec
 |  --- | --- | --- | --- |
 | `request_id` | `String` | Optional | requestId is unique identifier value that is attached to requests and messages that allow reference to a particular transaction or event chain. |
 | `status` | `String` | Optional | Status of the request |
-| `errors` | [`Array<NotFoundErrMsg>`](../../doc/models/not-found-err-msg.md) | Optional | Exception details of the error |
+| `errors` | [`Array[NotFoundErrMsg]`](../../doc/models/not-found-err-msg.md) | Optional | Exception details of the error |
 
 ## Example (as JSON)
 

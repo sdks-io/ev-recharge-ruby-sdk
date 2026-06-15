@@ -13,7 +13,7 @@ A Marker is a place on the map that represent multiple Locations at the same spo
 |  --- | --- | --- | --- |
 | `marker_type` | `String` | Required | Identifies the marker type. If it's a `MultiLocationMarker`, then the value is `MultiLocation` |
 | `unique_key` | `String` | Optional | Uniquely identifies the marker object |
-| `coordinates` | [`Coordinates`](../../doc/models/coordinates.md) | Optional | Coordinates of the Shell Recharge Site Location |
+| `coordinates` | [`Coordinates1`](../../doc/models/coordinates-1.md) | Optional | - |
 | `location_count` | `Float` | Optional | Number of Locations that this Marker represents in the given set of bounds |
 | `evse_count` | `Float` | Optional | Total number of Evses in Locations that this Marker represents |
 | `max_power` | `Float` | Optional | Maximum power in kW across all locations grouped in this marker (disregarding availability) |

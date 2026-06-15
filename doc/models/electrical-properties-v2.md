@@ -1,17 +1,17 @@
 
-# Electrical Properties
+# Electrical Properties V2
 
 Electrical Properties of the Connector
 
 ## Structure
 
-`ElectricalProperties`
+`ElectricalPropertiesV2`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `power_type` | [`ElectricalPropertiesPowerTypeEnum`](../../doc/models/electrical-properties-power-type-enum.md) | Optional | - |
+| `power_type` | [`ElectricalPropertiesPowerTypeEnum`](../../doc/models/electrical-properties-power-type-enum.md) | Optional | Power Type used in this connector. |
 | `voltage` | `Float` | Optional | Voltage in Volts for this connector |
 | `amperage` | `Float` | Optional | Electric Current in Amperes for this connector |
 | `max_electric_power` | `Float` | Optional | Power in Kilowatts for this connector |
@@ -20,10 +20,10 @@ Electrical Properties of the Connector
 
 ```json
 {
+  "powerType": "AC1Phase",
   "voltage": 230.0,
   "amperage": 16.0,
-  "maxElectricPower": 3.7,
-  "powerType": "DC"
+  "maxElectricPower": 3.7
 }
 ```
 

@@ -14,7 +14,7 @@
 | `per_k_wh` | `Float` | Optional | Tariff per kWh of energy consumed |
 | `currency` | `String` | Optional | ISO 4217 Currency Code of the local currency. |
 | `updated` | `String` | Optional | ISO8601-compliant UTC datetime of the last update of the Tariff |
-| `updated_by` | [`TariffVOUpdatedByEnum`](../../doc/models/tariff-vo-updated-by-enum.md) | Optional | - |
+| `updated_by` | [`TariffVOUpdatedByEnum`](../../doc/models/tariff-vo-updated-by-enum.md) | Optional | Source of the last update of the tariff details |
 | `structure` | `String` | Optional | Tariff structure that this tariff belongs to, typically Default unless specific tariff is defined for provider |
 
 ## Example (as JSON)
@@ -26,6 +26,7 @@
   "perKWh": 0.89,
   "currency": "EUR",
   "updated": "07/06/2021 10:44:24",
+  "updatedBy": "TariffService",
   "structure": "default"
 }
 ```
