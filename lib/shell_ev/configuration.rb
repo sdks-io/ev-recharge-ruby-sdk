@@ -7,14 +7,10 @@ module ShellEv
   # An enum for SDK environments.
   class Environment
     # PRODUCTION: Production Server
-    # ENVIRONMENT2: Production Server
-    # ENVIRONMENT3: Test Server
-    # ENVIRONMENT4: Test Server
+    # ENVIRONMENT2: Test Server
     ENVIRONMENT = [
       PRODUCTION = 'production'.freeze,
-      ENVIRONMENT2 = 'environment2'.freeze,
-      ENVIRONMENT3 = 'environment3'.freeze,
-      ENVIRONMENT4 = 'environment4'.freeze
+      ENVIRONMENT2 = 'environment2'.freeze
     ].freeze
 
     # Converts a string or symbol into a valid Environment constant.
@@ -25,8 +21,6 @@ module ShellEv
       case str
       when 'production' then PRODUCTION
       when 'environment2' then ENVIRONMENT2
-      when 'environment3' then ENVIRONMENT3
-      when 'environment4' then ENVIRONMENT4
 
       else
         warn "[Environment] Unknown environment '#{value}', falling back to #{default_value} "
@@ -38,14 +32,23 @@ module ShellEv
   # An enum for API servers.
   class Server
     SERVER = [
-      DEFAULT = 'default'.freeze
+      DEFAULT = 'default'.freeze,
+      ACCESS_TOKEN_SERVER = 'access token server'.freeze
     ].freeze
 
     # Converts a string or symbol into a valid Server constant.
     def self.from_value(value, default_value = DEFAULT)
       return default_value if value.nil?
 
-      default_value
+      str = value.to_s.strip.downcase
+      case str
+      when 'default' then DEFAULT
+      when 'access_token_server' then ACCESS_TOKEN_SERVER
+
+      else
+        warn "[Server] Unknown server '#{value}', falling back to #{default_value} "
+        default_value
+      end
     end
   end
 
@@ -172,16 +175,12 @@ module ShellEv
     # All the environments the SDK can run in.
     ENVIRONMENTS = {
       Environment::PRODUCTION => {
-        Server::DEFAULT => 'https://api.shell.com/ev'
+        Server::DEFAULT => 'https://api.shell.com/ev',
+        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
       },
       Environment::ENVIRONMENT2 => {
-        Server::DEFAULT => 'https://api.shell.com/v2/oauth'
-      },
-      Environment::ENVIRONMENT3 => {
-        Server::DEFAULT => 'https://api-test.shell.com/ev'
-      },
-      Environment::ENVIRONMENT4 => {
-        Server::DEFAULT => 'https://api-test.shell.com/v2/oauth'
+        Server::DEFAULT => 'https://api-test.shell.com/ev',
+        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
       }
     }.freeze
 

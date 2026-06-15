@@ -28,16 +28,16 @@ Go to the Shell Developer Portal: [https://developer.shell.com](https://develope
 Install the gem from the command line:
 
 ```bash
-gem install ev-recharge-sdk -v 2.0.0
+gem install ev-recharge-sdk -v 2.1.0
 ```
 
 Or add the gem to your Gemfile and run `bundle`:
 
 ```ruby
-gem 'ev-recharge-sdk', '2.0.0'
+gem 'ev-recharge-sdk', '2.1.0'
 ```
 
-For additional gem details, see the [RubyGems page for the ev-recharge-sdk gem](https://rubygems.org/gems/ev-recharge-sdk/versions/2.0.0).
+For additional gem details, see the [RubyGems page for the ev-recharge-sdk gem](https://rubygems.org/gems/ev-recharge-sdk/versions/2.1.0).
 
 ## IRB Console Usage
 
@@ -84,13 +84,13 @@ rake
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| environment | [`Environment`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/README.md#environments) | The API environment. <br> **Default: `Environment.PRODUCTION`** |
+| environment | [`Environment`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/README.md#environments) | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | connection | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
 | adapter | `Faraday::Adapter` | The Faraday adapter object passed by the SDK user for performing http requests |
 | timeout | `Float` | The value to use for connection timeout. <br> **Default: 60** |
@@ -100,8 +100,8 @@ The following parameters are configurable for the API Client:
 | retry_statuses | `Array` | A list of HTTP statuses to retry. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
 | retry_methods | `Array` | A list of HTTP methods to retry. <br> **Default: %i[get put]** |
 | http_callback | `HttpCallBack` | The Http CallBack allows defining callables for pre and post API calls. |
-| proxy_settings | [`ProxySettings`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/proxy-settings.md) | Optional proxy configuration to route HTTP requests through a proxy server. |
-| client_credentials_auth_credentials | [`ClientCredentialsAuthCredentials`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for OAuth 2 Client Credentials Grant |
+| proxy_settings | [`ProxySettings`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/proxy-settings.md) | Optional proxy configuration to route HTTP requests through a proxy server. |
+| client_credentials_auth_credentials | [`ClientCredentialsAuthCredentials`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for OAuth 2 Client Credentials Grant |
 
 The API client can be initialized as follows:
 
@@ -130,7 +130,7 @@ include ShellEv
 client = Client.from_env
 ```
 
-See the [`Environment-Based Client Initialization`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/environment-based-client-initialization.md) section for details.
+See the [`Environment-Based Client Initialization`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/environment-based-client-initialization.md) section for details.
 
 ## Environments
 
@@ -141,35 +141,33 @@ The SDK can be configured to use a different environment for making API calls. A
 | Name | Description |
 |  --- | --- |
 | PRODUCTION | **Default** Production Server |
-| ENVIRONMENT2 | Production Server |
-| ENVIRONMENT3 | Test Server |
-| ENVIRONMENT4 | Test Server |
+| ENVIRONMENT2 | Test Server |
 
 ## Authorization
 
 This API uses the following authentication schemes.
 
-* [`BearerAuth (OAuth 2 Client Credentials Grant)`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/auth/oauth-2-client-credentials-grant.md)
+* [`BearerAuth (OAuth 2 Client Credentials Grant)`](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/auth/oauth-2-client-credentials-grant.md)
 
 ## List of APIs
 
-* [Locations](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/controllers/locations.md)
-* [Charging](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/controllers/charging.md)
+* [Locations](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/controllers/locations.md)
+* [Charging](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/controllers/charging.md)
 
 ## SDK Infrastructure
 
 ### Configuration
 
-* [ProxySettings](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/proxy-settings.md)
-* [Environment-Based Client Initialization](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/environment-based-client-initialization.md)
+* [ProxySettings](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/proxy-settings.md)
+* [Environment-Based Client Initialization](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/environment-based-client-initialization.md)
 
 ### HTTP
 
-* [HttpResponse](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/http-response.md)
-* [HttpRequest](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/http-request.md)
+* [HttpResponse](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/http-response.md)
+* [HttpRequest](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/http-request.md)
 
 ### Utilities
 
-* [ApiHelper](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/api-helper.md)
-* [DateTimeHelper](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.0.0/doc/date-time-helper.md)
+* [ApiHelper](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/api-helper.md)
+* [DateTimeHelper](https://www.github.com/sdks-io/ev-recharge-ruby-sdk/tree/2.1.0/doc/date-time-helper.md)
 
