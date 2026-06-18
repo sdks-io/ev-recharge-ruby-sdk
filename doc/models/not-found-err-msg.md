@@ -14,17 +14,17 @@
 | `description` | `String` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenarios. actual response will vary based on the technical nature |
 | `details` | `Array[String]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0038",
-  "message": "Not Found",
-  "description": "Requested API resource not found",
-  "details": [
-    "details9",
-    "details0"
+```ruby
+not_found_err_msg = NotFoundErrMsg.new(
+  'E0038',
+  'Not Found',
+  'Requested API resource not found',
+  [
+    'details1',
+    'details2'
   ]
-}
+)
 ```
 

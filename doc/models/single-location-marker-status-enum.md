@@ -18,7 +18,7 @@ Minimum of all status values in the Marker, e.g. if at least one Evse in the Mar
 
 ## Example
 
-```
-Available
+```ruby
+single_location_marker_status = SingleLocationMarkerStatusEnum::UNAVAILABLE
 ```
 

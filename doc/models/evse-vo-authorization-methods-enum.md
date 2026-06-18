@@ -17,7 +17,7 @@ Methods that can be used to Authorize sessions on this EVSE
 
 ## Example
 
-```
-NewMotionApp
+```ruby
+evse_vo_authorization_methods = EvseVOAuthorizationMethodsEnum::RFIDTOKEN
 ```
 

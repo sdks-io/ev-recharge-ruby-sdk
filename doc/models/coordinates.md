@@ -14,12 +14,12 @@ Coordinates of the Shell Recharge Site Location
 | `latitude` | `Float` | Optional | Latitude of the Coordinate<br><br>**Constraints**: `>= -90`, `<= 90` |
 | `longitude` | `Float` | Optional | Longitude of the Coordinate<br><br>**Constraints**: `>= -180`, `<= 180` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "latitude": 52.143814,
-  "longitude": 52.143814
-}
+```ruby
+coordinates = Coordinates.new(
+  52.143814,
+  52.143814
+)
 ```
 

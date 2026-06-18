@@ -18,7 +18,7 @@ The current status of the EVSE units availability
 
 ## Example
 
-```
-Available
+```ruby
+evse_vo_status = EvseVOStatusEnum::AVAILABLE
 ```
 

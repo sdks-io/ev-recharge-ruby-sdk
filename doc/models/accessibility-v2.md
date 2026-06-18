@@ -13,11 +13,11 @@ Accessibility of the Location
 |  --- | --- | --- | --- |
 | `status` | [`AccessibilityStatusEnum`](../../doc/models/accessibility-status-enum.md) | Optional | Accessibility Status |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "FreePublic"
-}
+```ruby
+accessibility_v2 = AccessibilityV2.new(
+  AccessibilityStatusEnum::FREEPUBLIC
+)
 ```
 

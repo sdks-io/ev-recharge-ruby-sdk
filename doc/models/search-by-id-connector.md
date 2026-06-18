@@ -17,131 +17,210 @@ An EVSE can have one or many Connectors. Each Connector will normally have a dif
 | `electrical_properties` | [`ElectricalPropertiesV2`](../../doc/models/electrical-properties-v2.md) | Optional | Electrical Properties of the Connector |
 | `tariffs` | [`Array[TariffV2]`](../../doc/models/tariff-v2.md) | Optional | Tariffs applicable to this Connector |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "2",
-  "externalId": "01000861_1_21",
-  "connectorType": "Type2",
-  "electricalProperties": {
-    "powerType": "AC1Phase",
-    "voltage": 110.62,
-    "amperage": 46.4,
-    "maxElectricPower": 232.04
-  },
-  "tariffs": [
-    {
-      "tariffId": "tariffId4",
-      "tariffType": "DRIVER",
-      "powerRange": {
-        "min": 102,
-        "max": 20
-      },
-      "internalId": "internalId2",
-      "operatorId": "operatorId8",
-      "providerId": "providerId2",
-      "currency": "currency8",
-      "tariffAltText": [
-        {
-          "language": "language8",
-          "text": "text6"
-        }
+```ruby
+search_by_id_connector = SearchByIdConnector.new(
+  '2',
+  '01000861_1_21',
+  ConnectorVOConnectorTypeEnum::TYPE2,
+  ElectricalPropertiesV2.new(
+    ElectricalPropertiesPowerTypeEnum::AC1PHASE,
+    110.62,
+    46.4,
+    232.04
+  ),
+  [
+    TariffV2.new(
+      'tariffId4',
+      TariffTypeEnum::DRIVER,
+      PowerRange.new(
+        102,
+        20
+      ),
+      'internalId2',
+      'operatorId8',
+      'providerId2',
+      'currency8',
+      [
+        TariffAltText.new(
+          'language8',
+          'text6'
+        )
       ],
-      "minPrice": 189.42,
-      "maxPrice": 247.64,
-      "elements": [
-        {
-          "priceComponents": [
-            {
-              "type": "TIME",
-              "stepSize": 124,
-              "price": 196.82,
-              "vat": 137.74
-            },
-            {
-              "type": "TIME",
-              "stepSize": 124,
-              "price": 196.82,
-              "vat": 137.74
-            },
-            {
-              "type": "TIME",
-              "stepSize": 124,
-              "price": 196.82,
-              "vat": 137.74
-            }
+      189.42,
+      247.64,
+      [
+        TariffElement.new(
+          [
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            ),
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            ),
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            )
           ],
-          "restrictions": {
-            "startTime": "startTime0",
-            "endTime": "endTime2",
-            "startDate": "2016-03-13",
-            "endDate": "2016-03-13",
-            "minKwh": 247.22
-          }
-        }
+          Restrictions.new(
+            'startTime0',
+            'endTime2',
+            Date.iso8601('2016-03-13'),
+            Date.iso8601('2016-03-13'),
+            247.22,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            []
+          )
+        )
       ],
-      "startDateTime": "2016-03-13T12:52:32.123Z",
-      "endDateTime": "2016-03-13T12:52:32.123Z",
-      "lastUpdated": "2016-03-13T12:52:32.123Z",
-      "createdBy": "createdBy4"
-    },
-    {
-      "tariffId": "tariffId4",
-      "tariffType": "DRIVER",
-      "powerRange": {
-        "min": 102,
-        "max": 20
-      },
-      "internalId": "internalId2",
-      "operatorId": "operatorId8",
-      "providerId": "providerId2",
-      "currency": "currency8",
-      "tariffAltText": [
-        {
-          "language": "language8",
-          "text": "text6"
-        }
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      'createdBy4'
+    ),
+    TariffV2.new(
+      'tariffId4',
+      TariffTypeEnum::DRIVER,
+      PowerRange.new(
+        102,
+        20
+      ),
+      'internalId2',
+      'operatorId8',
+      'providerId2',
+      'currency8',
+      [
+        TariffAltText.new(
+          'language8',
+          'text6'
+        )
       ],
-      "minPrice": 189.42,
-      "maxPrice": 247.64,
-      "elements": [
-        {
-          "priceComponents": [
-            {
-              "type": "TIME",
-              "stepSize": 124,
-              "price": 196.82,
-              "vat": 137.74
-            },
-            {
-              "type": "TIME",
-              "stepSize": 124,
-              "price": 196.82,
-              "vat": 137.74
-            },
-            {
-              "type": "TIME",
-              "stepSize": 124,
-              "price": 196.82,
-              "vat": 137.74
-            }
+      189.42,
+      247.64,
+      [
+        TariffElement.new(
+          [
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            ),
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            ),
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            )
           ],
-          "restrictions": {
-            "startTime": "startTime0",
-            "endTime": "endTime2",
-            "startDate": "2016-03-13",
-            "endDate": "2016-03-13",
-            "minKwh": 247.22
-          }
-        }
+          Restrictions.new(
+            'startTime0',
+            'endTime2',
+            Date.iso8601('2016-03-13'),
+            Date.iso8601('2016-03-13'),
+            247.22,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            []
+          )
+        )
       ],
-      "startDateTime": "2016-03-13T12:52:32.123Z",
-      "endDateTime": "2016-03-13T12:52:32.123Z",
-      "lastUpdated": "2016-03-13T12:52:32.123Z",
-      "createdBy": "createdBy4"
-    }
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      'createdBy4'
+    ),
+    TariffV2.new(
+      'tariffId4',
+      TariffTypeEnum::DRIVER,
+      PowerRange.new(
+        102,
+        20
+      ),
+      'internalId2',
+      'operatorId8',
+      'providerId2',
+      'currency8',
+      [
+        TariffAltText.new(
+          'language8',
+          'text6'
+        )
+      ],
+      189.42,
+      247.64,
+      [
+        TariffElement.new(
+          [
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            ),
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            ),
+            PriceComponent.new(
+              TypeEnum::TIME,
+              124,
+              196.82,
+              137.74
+            )
+          ],
+          Restrictions.new(
+            'startTime0',
+            'endTime2',
+            Date.iso8601('2016-03-13'),
+            Date.iso8601('2016-03-13'),
+            247.22,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            nil,
+            []
+          )
+        )
+      ],
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
+      'createdBy4'
+    )
   ]
-}
+)
 ```
 

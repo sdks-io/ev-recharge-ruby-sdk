@@ -30,3 +30,9 @@ Filter by Locations that have Connectors with the set of Connector Types
 | `TESLA` |
 | `UNSPECIFIED` |
 
+## Example
+
+```ruby
+get_ev_locations_connector_types = GetEVLocationsConnectorTypesEnum::INDUSTRIAL2PDC
+```
+

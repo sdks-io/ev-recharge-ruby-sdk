@@ -19,20 +19,20 @@ A Marker is a place on the map that represent multiple Locations at the same spo
 | `max_power` | `Float` | Optional | Maximum power in kW across all locations grouped in this marker (disregarding availability) |
 | `geo_hash` | `String` | Optional | GeoHash of marker coordinates |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "markerType": "MultiLocation",
-  "uniqueKey": "2060319_6",
-  "locationCount": 6.0,
-  "evseCount": 10.0,
-  "maxPower": 42.0,
-  "geoHash": "sx",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  }
-}
+```ruby
+multi_location_marker = MultiLocationMarker.new(
+  'MultiLocation',
+  '2060319_6',
+  Coordinates1.new(
+    39.14,
+    36.94
+  ),
+  6,
+  10,
+  42,
+  'sx'
+)
 ```
 

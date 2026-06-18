@@ -13,13 +13,13 @@
 | `start_time` | `String` | Optional | Hour in 24h local time when the location opens. |
 | `end_time` | `String` | Optional | Hour in 24h local time when the location closes. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "weekDay": "Mon",
-  "startTime": "08:00",
-  "endTime": "23:00"
-}
+```ruby
+opening_hours_object = OpeningHoursObject.new(
+  OpeningHoursObjectWeekDayEnum::MON,
+  '08:00',
+  '23:00'
+)
 ```
 

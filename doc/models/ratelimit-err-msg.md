@@ -14,17 +14,16 @@
 | `description` | `String` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenarios. actual response will vary based on the technical nature |
 | `details` | `Array[String]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0009",
-  "message": "Too Many Requests",
-  "description": "Exceeded maximum allowed number of request limit",
-  "details": [
-    "details9",
-    "details0"
+```ruby
+ratelimit_err_msg = RatelimitErrMsg.new(
+  'E0009',
+  'Too Many Requests',
+  'Exceeded maximum allowed number of request limit',
+  [
+    'details3'
   ]
-}
+)
 ```
 

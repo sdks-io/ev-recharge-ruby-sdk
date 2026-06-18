@@ -13,13 +13,13 @@
 | `message` | `String` | Optional | Error description in English |
 | `description` | `String` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenario. actual response will vary based on the technical nature |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0005",
-  "message": "Internal Server Error",
-  "description": "Server encountered an unexpected condition that prevented it from fulfilling the request"
-}
+```ruby
+internal_error_object = InternalErrorObject.new(
+  'E0005',
+  'Internal Server Error',
+  'Server encountered an unexpected condition that prevented it from fulfilling the request'
+)
 ```
 

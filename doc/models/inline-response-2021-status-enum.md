@@ -16,7 +16,7 @@ Indicates overall status of the request
 
 ## Example
 
-```
-SUCCESS
+```ruby
+inline_response2021_status = InlineResponse2021StatusEnum::SUCCESS
 ```
 

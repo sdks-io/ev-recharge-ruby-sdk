@@ -30,3 +30,9 @@ Filter by Locations that have Connectors with these Connector Types
 | `TESLA` |
 | `UNSPECIFIED` |
 
+## Example
+
+```ruby
+nearby_locations_connector_types = NearbyLocationsConnectorTypesEnum::NEMA520
+```
+

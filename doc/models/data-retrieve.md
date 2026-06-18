@@ -18,17 +18,21 @@
 | `stopped_at` | `DateTime` | Optional | When the session is stopped |
 | `session_state` | [`ChargeRetrieveState`](../../doc/models/charge-retrieve-state.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "78b5d7a3-bdba-43d7-9851-1c84fcddb782",
-  "userId": "281482b6-2c9a-4fd1-b3ea-1928edb40ef9",
-  "emaId": "NL-TNM-C00122045-K",
-  "evseId": "NL*TNM*E02003451*0",
-  "startedAt": "08/19/2015 11:20:27",
-  "stoppedAt": "08/19/2015 11:20:27",
-  "lastUpdated": "lastUpdated2"
-}
+```ruby
+data_retrieve = DataRetrieve.new(
+  '78b5d7a3-bdba-43d7-9851-1c84fcddb782',
+  '281482b6-2c9a-4fd1-b3ea-1928edb40ef9',
+  'NL-TNM-C00122045-K',
+  'NL*TNM*E02003451*0',
+  'lastUpdated6',
+  DateTimeHelper.from_rfc3339('2015-08-19T11:20:27Z'),
+  DateTimeHelper.from_rfc3339('2015-08-19T11:20:27Z'),
+  ChargeRetrieveState.new(
+    nil,
+    ChargeError.new
+  )
+)
 ```
 

@@ -13,17 +13,17 @@
 | `status` | [`GetChargeSessionRetrieveResponse200JsonStatusEnum`](../../doc/models/get-charge-session-retrieve-response-200-json-status-enum.md) | Required | Indicates overall status of the request |
 | `data` | [`Array[InlineResponse202Data]`](../../doc/models/inline-response-202-data.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "requestId": "9d2dee33-7803-485a-a2b1-2c7538e597ee",
-  "status": "SUCCESS",
-  "data": [
-    {
-      "sessionId": "c3e332f0-1bb2-4f50-a96b-e075bbb71e68"
-    }
+```ruby
+inline_response_202 = InlineResponse202.new(
+  '9d2dee33-7803-485a-a2b1-2c7538e597ee',
+  GetChargeSessionRetrieveResponse200JsonStatusEnum::SUCCESS,
+  [
+    InlineResponse202Data.new(
+      'c3e332f0-1bb2-4f50-a96b-e075bbb71e68'
+    )
   ]
-}
+)
 ```
 

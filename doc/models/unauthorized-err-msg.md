@@ -14,17 +14,16 @@
 | `description` | `String` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenarios. actual response will vary based on the technical nature |
 | `details` | `Array[String]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0003",
-  "message": "Unauthorized",
-  "description": "Invalid Access Token",
-  "details": [
-    "details1",
-    "details2"
+```ruby
+unauthorized_err_msg = UnauthorizedErrMsg.new(
+  'E0003',
+  'Unauthorized',
+  'Invalid Access Token',
+  [
+    'details1'
   ]
-}
+)
 ```
 

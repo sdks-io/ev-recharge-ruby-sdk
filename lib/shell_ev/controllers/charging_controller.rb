@@ -22,7 +22,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::POST,
                                      '/v2/charge-session/start',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .header_param(new_parameter('application/json', key: 'Content-Type'))
                    .body_param(new_parameter(body))
@@ -73,7 +73,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::POST,
                                      '/v2/charge-session/stop',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(session_id, key: 'sessionId'))
                    .header_param(new_parameter('application/json', key: 'accept'))
@@ -121,7 +121,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/charge-session/retrieve',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(session_id, key: 'sessionId'))
                    .header_param(new_parameter('application/json', key: 'accept'))
@@ -170,7 +170,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/charge-session/active',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(ema_id, key: 'emaId'))
                    .header_param(new_parameter('application/json', key: 'accept'))

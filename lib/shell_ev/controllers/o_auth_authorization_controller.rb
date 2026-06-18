@@ -19,8 +19,8 @@ module ShellEv
                       _field_parameters: nil)
       @api_call
         .request(new_request_builder(HttpMethodEnum::POST,
-                                     '/token',
-                                     Server::ACCESS_TOKEN_SERVER)
+                                     '/v2/oauth/token',
+                                     Server::OAUTH_SERVER)
                    .form_param(new_parameter('client_credentials', key: 'grant_type'))
                    .header_param(new_parameter(authorization, key: 'Authorization'))
                    .form_param(new_parameter(scope, key: 'scope'))

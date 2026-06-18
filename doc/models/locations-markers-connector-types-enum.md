@@ -30,3 +30,9 @@ Filter by Locations that have Connectors with the set of Connector Types
 | `TESLA` |
 | `UNSPECIFIED` |
 
+## Example
+
+```ruby
+locations_markers_connector_types = LocationsMarkersConnectorTypesEnum::TYPE2
+```
+

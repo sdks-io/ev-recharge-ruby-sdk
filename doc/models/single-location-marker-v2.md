@@ -21,21 +21,22 @@ A Marker is a place on the map that represent a single Location
 | `operator_name` | `String` | Optional | Operator of this Shell Recharge Location |
 | `marker_type` | `String` | Required, Constant | Type of the Marker, in this case it will always be SingleLocation<br><br>**Value**: `'SingleLocation'` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "Available",
-  "evseCount": 12.0,
-  "locationCount": 6.0,
-  "locationUid": "2057411",
-  "operatorName": "TheNewMotion",
-  "markerType": "SingleLocation",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  },
-  "maxPower": 45.08
-}
+```ruby
+single_location_marker_v2 = SingleLocationMarkerV2.new(
+  'SingleLocation',
+  SingleLocationMarkerStatusEnum::AVAILABLE,
+  Coordinates.new(
+    39.14,
+    36.94
+  ),
+  12,
+  17,
+  6,
+  '2057411',
+  [],
+  'TheNewMotion'
+)
 ```
 

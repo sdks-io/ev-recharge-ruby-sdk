@@ -13,59 +13,54 @@
 | `status` | `String` | Optional | status of the API call |
 | `data` | [`Array[SearchByIdLocationRespone]`](../../doc/models/search-by-id-location-respone.md) | Optional | API Response |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "requestId": "9d2dee33-7803-485a-a2b1-2c7538e597ee",
-  "status": "SUCCESS",
-  "data": [
-    {
-      "uid": "uid0",
-      "externalId": "externalId6",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "operatorName": "operatorName0",
-      "address": {
-        "streetAndNumber": "streetAndNumber2",
-        "postalCode": "postalCode8",
-        "city": "city6",
-        "country": "country0"
-      }
-    },
-    {
-      "uid": "uid0",
-      "externalId": "externalId6",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "operatorName": "operatorName0",
-      "address": {
-        "streetAndNumber": "streetAndNumber2",
-        "postalCode": "postalCode8",
-        "city": "city6",
-        "country": "country0"
-      }
-    },
-    {
-      "uid": "uid0",
-      "externalId": "externalId6",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "operatorName": "operatorName0",
-      "address": {
-        "streetAndNumber": "streetAndNumber2",
-        "postalCode": "postalCode8",
-        "city": "city6",
-        "country": "country0"
-      }
-    }
+```ruby
+search_by_id_response = SearchByIdResponse.new(
+  '9d2dee33-7803-485a-a2b1-2c7538e597ee',
+  'SUCCESS',
+  [
+    SearchByIdLocationRespone.new(
+      'uid0',
+      'externalId6',
+      Coordinates.new(
+        39.14,
+        36.94
+      ),
+      'operatorName0',
+      Address.new(
+        'streetAndNumber2',
+        'postalCode8',
+        'city6',
+        'country0'
+      ),
+      AccessibilityV2.new(
+        envrr
+      ),
+      [],
+      []
+    ),
+    SearchByIdLocationRespone.new(
+      'uid0',
+      'externalId6',
+      Coordinates.new(
+        39.14,
+        36.94
+      ),
+      'operatorName0',
+      Address.new(
+        'streetAndNumber2',
+        'postalCode8',
+        'city6',
+        'country0'
+      ),
+      AccessibilityV2.new(
+        envrr
+      ),
+      [],
+      []
+    )
   ]
-}
+)
 ```
 

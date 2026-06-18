@@ -22,22 +22,23 @@ A Marker is a place on the map that represent a single Location
 | `authorization_methods` | [`Array[SingleLocationMarkerAuthorizationMethodsItemsEnum]`](../../doc/models/single-location-marker-authorization-methods-items-enum.md) | Optional | Methods that can be used to Authorize sessions on this EVSE |
 | `operator_id` | `String` | Optional | Unique Id of the operator |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "markerType": "SingleLocation",
-  "uniqueKey": "2057411_1",
-  "status": "Available",
-  "evseCount": 12.0,
-  "maxPower": 42.0,
-  "geoHash": "sx",
-  "locationUid": 2057411,
-  "operatorId": "AT-HTB",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  }
-}
+```ruby
+single_location_marker = SingleLocationMarker.new(
+  'SingleLocation',
+  '2057411_1',
+  SingleLocationMarkerStatusEnum::AVAILABLE,
+  Coordinates1.new(
+    39.14,
+    36.94
+  ),
+  12,
+  42,
+  'sx',
+  2057411,
+  [],
+  'AT-HTB'
+)
 ```
 

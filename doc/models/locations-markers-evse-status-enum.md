@@ -16,3 +16,9 @@ Filter by Locations that have the given status
 | `UNAVAILABLE` |
 | `UNKNOWN` |
 
+## Example
+
+```ruby
+locations_markers_evse_status = LocationsMarkersEvseStatusEnum::AVAILABLE
+```
+

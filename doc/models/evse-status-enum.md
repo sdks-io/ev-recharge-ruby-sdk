@@ -14,3 +14,9 @@
 | `UNAVAILABLE` |
 | `UNKNOWN` |
 
+## Example
+
+```ruby
+evse_status = EvseStatusEnum::UNAVAILABLE
+```
+

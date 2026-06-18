@@ -14,14 +14,14 @@
 | `price` | `Float` | Required | Price per step in the specified currency for this price component |
 | `vat` | `Float` | Required | VAT percentage applicable to this price component |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "type": "FLAT",
-  "stepSize": 1,
-  "price": 0.3,
-  "vat": 21.0
-}
+```ruby
+price_component = PriceComponent.new(
+  TypeEnum::FLAT,
+  1,
+  0.3,
+  21
+)
 ```
 

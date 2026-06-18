@@ -18,7 +18,7 @@ Source of the last update of the tariff details
 
 ## Example
 
-```
-TariffService
+```ruby
+tariff_vo_updated_by = TariffVOUpdatedByEnum::TARIFFSERVICE
 ```
 

@@ -16,7 +16,7 @@ Indicates overall status of the request
 
 ## Example
 
-```
-SUCCESS
+```ruby
+active_response200_json_status = ActiveResponse200JsonStatusEnum::SUCCESS
 ```
 

@@ -23,22 +23,23 @@
 | `max_duration` | `Integer` | Optional | Maximum session duration in seconds |
 | `day_of_week` | [`Array[DayOfWeekEnum]`](../../doc/models/day-of-week-enum.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "startTime": "08:00",
-  "endTime": "18:00",
-  "startDate": "2021-10-06",
-  "endDate": "2021-10-31",
-  "minKwh": 0.1,
-  "maxKwh": 100,
-  "minCurrent": 0,
-  "maxCurrent": 500,
-  "minPower": 0,
-  "maxPower": 100,
-  "minDuration": 0,
-  "maxDuration": 86400
-}
+```ruby
+restrictions = Restrictions.new(
+  '08:00',
+  '18:00',
+  Date.iso8601('2021-10-06'),
+  Date.iso8601('2021-10-31'),
+  0.1,
+  100,
+  0,
+  500,
+  0,
+  100,
+  0,
+  86400,
+  []
+)
 ```
 

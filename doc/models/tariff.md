@@ -17,17 +17,17 @@
 | `updated_by` | [`TariffVOUpdatedByEnum`](../../doc/models/tariff-vo-updated-by-enum.md) | Optional | Source of the last update of the tariff details |
 | `structure` | `String` | Optional | Tariff structure that this tariff belongs to, typically Default unless specific tariff is defined for provider |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "startFee": 0.0,
-  "perMinute": 0.12,
-  "perKWh": 0.89,
-  "currency": "EUR",
-  "updated": "07/06/2021 10:44:24",
-  "updatedBy": "TariffService",
-  "structure": "default"
-}
+```ruby
+tariff = Tariff.new(
+  0,
+  0.12,
+  0.89,
+  'EUR',
+  '2021-07-06T10:44:24Z',
+  TariffVOUpdatedByEnum::TARIFFSERVICE,
+  'default'
+)
 ```
 

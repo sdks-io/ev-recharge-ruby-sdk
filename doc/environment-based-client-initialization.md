@@ -36,7 +36,7 @@ The same method can accept keyword arguments to override any values read from th
 ```ruby
 # To override or fill in values that are not set in the environment, pass them
 # as keyword arguments when calling `from_env`
-client = Client.from_env(environment: 'production', timeout: 30)
+client = Client.from_env(environment: 'sit', timeout: 30)
 ```
 
 Values provided through arguments take precedence over those defined in environment variables.
@@ -44,7 +44,7 @@ Values provided through arguments take precedence over those defined in environm
 ## Example .env File
 
 ```ruby
-ENVIRONMENT='production'
+ENVIRONMENT='sit'
 
 O_AUTH_CLIENT_ID='oAuthClientId'
 O_AUTH_CLIENT_SECRET='oAuthClientSecret'

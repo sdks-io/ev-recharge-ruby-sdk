@@ -22,27 +22,32 @@
 | `operator_id` | `String` | Optional | Unique Id of the operator |
 | `open_twenty_four_seven` | `TrueClass \| FalseClass` | Optional | Whether the location is open 24/7 |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "NL*MKS*E0000001*0",
-  "externalId": "01001188",
-  "operatorName": "TheNewMotion",
-  "updated": "10/06/2021 10:44:24",
-  "locationType": "Unknown",
-  "operatorId": "AT-HTB",
-  "openTwentyFourSeven": true,
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  },
-  "address": {
-    "streetAndNumber": "streetAndNumber2",
-    "postalCode": "postalCode8",
-    "city": "city6",
-    "country": "country0"
-  }
-}
+```ruby
+location_respone_object_v2 = LocationResponeObjectV2.new(
+  'NL*MKS*E0000001*0',
+  '01001188',
+  Coordinates.new(
+    39.14,
+    36.94
+  ),
+  'TheNewMotion',
+  Address.new(
+    'streetAndNumber2',
+    'postalCode8',
+    'city6',
+    'country0'
+  ),
+  AccessibilityV2.new(
+    envrr
+  ),
+  [],
+  [],
+  '2021-10-06T10:44:24Z',
+  'Unknown',
+  'AT-HTB',
+  true
+)
 ```
 

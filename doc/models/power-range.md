@@ -12,12 +12,12 @@
 | `min` | `Integer` | Required | Minimum supported power in kW |
 | `max` | `Integer` | Required | Maximum supported power in kW |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "min": 0,
-  "max": 100
-}
+```ruby
+power_range = PowerRange.new(
+  0,
+  100
+)
 ```
 

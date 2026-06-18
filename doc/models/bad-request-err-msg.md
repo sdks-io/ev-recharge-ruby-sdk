@@ -14,18 +14,16 @@
 | `description` | `String` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenarios. actual response will vary based on the validation error |
 | `details` | `Array[String]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0001",
-  "message": "Bad Request",
-  "description": "Authorization header is missing",
-  "details": [
-    "details7",
-    "details8",
-    "details9"
+```ruby
+bad_request_err_msg = BadRequestErrMsg.new(
+  'E0001',
+  'Bad Request',
+  'Authorization header is missing',
+  [
+    'details5'
   ]
-}
+)
 ```
 

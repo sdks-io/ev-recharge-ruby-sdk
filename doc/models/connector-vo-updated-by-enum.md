@@ -18,7 +18,7 @@ Source of the last update
 
 ## Example
 
-```
-TariffService
+```ruby
+connector_vo_updated_by = ConnectorVOUpdatedByEnum::TARIFFSERVICE
 ```
 

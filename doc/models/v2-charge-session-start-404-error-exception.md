@@ -13,32 +13,13 @@
 | `status` | `String` | Optional | Status of the request |
 | `errors` | [`Array[NotFoundErrMsg]`](../../doc/models/not-found-err-msg.md) | Optional | Exception details of the error |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "requestId": "9d2dee33-7803-485a-a2b1-2c7538e597ee",
-  "status": "FAILED",
-  "errors": [
-    {
-      "code": "code8",
-      "message": "message0",
-      "description": "description0",
-      "details": [
-        "details5",
-        "details6"
-      ]
-    },
-    {
-      "code": "code8",
-      "message": "message0",
-      "description": "description0",
-      "details": [
-        "details5",
-        "details6"
-      ]
-    }
-  ]
-}
+```ruby
+begin
+  # make the API call
+rescue V2ChargeSessionStart404ErrorException => e
+  puts "Caught V2ChargeSessionStart404ErrorException: #{e.message}"
+end
 ```
 

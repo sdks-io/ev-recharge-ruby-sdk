@@ -19,7 +19,7 @@
 
 ## Example
 
-```
-MONDAY
+```ruby
+day_of_week = DayOfWeekEnum::SUNDAY
 ```
 

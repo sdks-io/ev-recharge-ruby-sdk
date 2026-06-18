@@ -28,3 +28,9 @@
 | `TESLA` |
 | `UNSPECIFIED` |
 
+## Example
+
+```ruby
+connector_types = ConnectorTypesEnum::TYPE3
+```
+

@@ -12,12 +12,12 @@
 | `language` | `String` | Required | ISO language code |
 | `text` | `String` | Required | Human readable tariff description |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "language": "en",
-  "text": "€0.30 per kWh"
-}
+```ruby
+tariff_alt_text = TariffAltText.new(
+  'en',
+  '€0.30 per kWh'
+)
 ```
 

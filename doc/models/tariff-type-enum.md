@@ -16,3 +16,9 @@ Tariff type classification
 | `REIMBURSEMENT` |
 | `VMSP` |
 
+## Example
+
+```ruby
+tariff_type = TariffTypeEnum::DRIVER
+```
+

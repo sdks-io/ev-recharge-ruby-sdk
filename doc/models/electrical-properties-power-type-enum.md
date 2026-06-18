@@ -17,7 +17,7 @@ Power Type used in this connector.
 
 ## Example
 
-```
-AC1Phase
+```ruby
+electrical_properties_power_type = ElectricalPropertiesPowerTypeEnum::DC
 ```
 

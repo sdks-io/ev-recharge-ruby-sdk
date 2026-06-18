@@ -18,7 +18,7 @@ Accessibility Status
 
 ## Example
 
-```
-FreePublic
+```ruby
+accessibility_status = AccessibilityStatusEnum::RESTRICTED
 ```
 

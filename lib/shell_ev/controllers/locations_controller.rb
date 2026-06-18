@@ -75,7 +75,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/locations',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(evse_status, key: 'evseStatus'))
                    .query_param(new_parameter(connector_types, key: 'connectorTypes'))
@@ -145,7 +145,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/locations/{id}',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .template_param(new_parameter(id, key: 'id')
                                     .should_encode(true))
@@ -257,7 +257,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/locations/nearby',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(latitude, key: 'latitude'))
                    .query_param(new_parameter(longitude, key: 'longitude'))
@@ -382,7 +382,7 @@ module ShellEv
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/v2/locations/markers',
-                                     Server::DEFAULT)
+                                     Server::SHELL)
                    .header_param(new_parameter(request_id, key: 'RequestId'))
                    .query_param(new_parameter(west, key: 'west'))
                    .query_param(new_parameter(south, key: 'south'))

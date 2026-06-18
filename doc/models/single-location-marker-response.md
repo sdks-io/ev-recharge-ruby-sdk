@@ -13,47 +13,56 @@
 | `status` | `String` | Optional | status of the API call |
 | `data` | Array[[SingleLocationMarker](../../doc/models/single-location-marker.md) \| [MultiLocationMarker](../../doc/models/multi-location-marker.md)] \| nil | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "requestId": "9d2dee33-7803-485a-a2b1-2c7538e597ee",
-  "status": "SUCCESS",
-  "data": [
-    {
-      "markerType": "SingleLocation",
-      "uniqueKey": "uniqueKey2",
-      "status": "Available",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "evseCount": 26.34,
-      "maxPower": 241.78
-    },
-    {
-      "markerType": "SingleLocation",
-      "uniqueKey": "uniqueKey2",
-      "status": "Available",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "evseCount": 26.34,
-      "maxPower": 241.78
-    },
-    {
-      "markerType": "SingleLocation",
-      "uniqueKey": "uniqueKey2",
-      "status": "Available",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "evseCount": 26.34,
-      "maxPower": 241.78
-    }
+```ruby
+single_location_marker_response = SingleLocationMarkerResponse.new(
+  '9d2dee33-7803-485a-a2b1-2c7538e597ee',
+  'SUCCESS',
+  [
+    SingleLocationMarker.new(
+      'SingleLocation',
+      'uniqueKey2',
+      SingleLocationMarkerStatusEnum::AVAILABLE,
+      Coordinates1.new(
+        39.14,
+        36.94
+      ),
+      26.34,
+      241.78,
+      nil,
+      nil,
+      []
+    ),
+    SingleLocationMarker.new(
+      'SingleLocation',
+      'uniqueKey2',
+      SingleLocationMarkerStatusEnum::AVAILABLE,
+      Coordinates1.new(
+        39.14,
+        36.94
+      ),
+      26.34,
+      241.78,
+      nil,
+      nil,
+      []
+    ),
+    SingleLocationMarker.new(
+      'SingleLocation',
+      'uniqueKey2',
+      SingleLocationMarkerStatusEnum::AVAILABLE,
+      Coordinates1.new(
+        39.14,
+        36.94
+      ),
+      26.34,
+      241.78,
+      nil,
+      nil,
+      []
+    )
   ]
-}
+)
 ```
 

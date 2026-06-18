@@ -16,3 +16,9 @@ Filter by Locations that have the given status
 | `UNAVAILABLE` |
 | `UNKNOWN` |
 
+## Example
+
+```ruby
+nearby_locations_evse_status = NearbyLocationsEvseStatusEnum::UNAVAILABLE
+```
+

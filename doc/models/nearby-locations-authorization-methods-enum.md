@@ -15,3 +15,9 @@ Filter by Locations that support the given Authorization Methods
 | `RFIDTOKEN` |
 | `PNC` |
 
+## Example
+
+```ruby
+nearby_locations_authorization_methods = NearbyLocationsAuthorizationMethodsEnum::NEWMOTIONAPP
+```
+

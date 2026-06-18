@@ -18,7 +18,7 @@ Type of the price component
 
 ## Example
 
-```
-FLAT
+```ruby
+type = TypeEnum::FLAT
 ```
 

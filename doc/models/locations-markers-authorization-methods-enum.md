@@ -15,3 +15,9 @@ Filter by Locations that support the given Authorization Methods
 | `RFIDTOKEN` |
 | `PNC` |
 
+## Example
+
+```ruby
+locations_markers_authorization_methods = LocationsMarkersAuthorizationMethodsEnum::PNC
+```
+

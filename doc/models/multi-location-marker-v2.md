@@ -18,19 +18,19 @@ A Marker is a place on the map that represent multiple Locations at the same spo
 | `operator_name` | `String` | Optional | Operator of this Shell Recharge Location |
 | `marker_type` | `String` | Required, Constant | Type of the Marker, in this case it will always be MultiLocation<br><br>**Value**: `'MultiLocation'` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "locationCount": 6.0,
-  "evseCount": 10.0,
-  "maxPower": 42.0,
-  "operatorName": "TheNewMotion",
-  "markerType": "MultiLocation",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  }
-}
+```ruby
+multi_location_marker_v2 = MultiLocationMarkerV2.new(
+  'MultiLocation',
+  Coordinates.new(
+    39.14,
+    36.94
+  ),
+  6,
+  10,
+  42,
+  'TheNewMotion'
+)
 ```
 

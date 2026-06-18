@@ -16,19 +16,19 @@ An EVSE can have one or many Connectors. Each Connector will normally have a dif
 | `connector_type` | [`ConnectorVOConnectorTypeEnum`](../../doc/models/connector-vo-connector-type-enum.md) | Optional | Type of the connector in the EVSE unit. |
 | `electrical_properties` | [`ElectricalPropertiesV2`](../../doc/models/electrical-properties-v2.md) | Optional | Electrical Properties of the Connector |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "2",
-  "externalId": "01000861_1_21",
-  "connectorType": "Type2",
-  "electricalProperties": {
-    "powerType": "AC1Phase",
-    "voltage": 110.62,
-    "amperage": 46.4,
-    "maxElectricPower": 232.04
-  }
-}
+```ruby
+connector_v2 = ConnectorV2.new(
+  '2',
+  '01000861_1_21',
+  ConnectorVOConnectorTypeEnum::TYPE2,
+  ElectricalPropertiesV2.new(
+    ElectricalPropertiesPowerTypeEnum::AC1PHASE,
+    110.62,
+    46.4,
+    232.04
+  )
+)
 ```
 

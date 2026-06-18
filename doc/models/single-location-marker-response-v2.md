@@ -13,36 +13,53 @@
 | `status` | `String` | Optional | status of the API call |
 | `data` | Array[[SingleLocationMarkerV2](../../doc/models/single-location-marker-v2.md) \| [MultiLocationMarkerV2](../../doc/models/multi-location-marker-v2.md)] \| nil | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "requestId": "9d2dee33-7803-485a-a2b1-2c7538e597ee",
-  "status": "SUCCESS",
-  "data": [
-    {
-      "markerType": "SingleLocation",
-      "status": "Unavailable",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "evseCount": 223.04,
-      "maxPower": 45.08,
-      "locationCount": 62.98
-    },
-    {
-      "markerType": "SingleLocation",
-      "status": "Unavailable",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "evseCount": 223.04,
-      "maxPower": 45.08,
-      "locationCount": 62.98
-    }
+```ruby
+single_location_marker_response_v2 = SingleLocationMarkerResponseV2.new(
+  '9d2dee33-7803-485a-a2b1-2c7538e597ee',
+  'SUCCESS',
+  [
+    SingleLocationMarkerV2.new(
+      'SingleLocation',
+      SingleLocationMarkerStatusEnum::UNAVAILABLE,
+      Coordinates.new(
+        39.14,
+        36.94
+      ),
+      223.04,
+      45.08,
+      62.98,
+      nil,
+      []
+    ),
+    SingleLocationMarkerV2.new(
+      'SingleLocation',
+      SingleLocationMarkerStatusEnum::UNAVAILABLE,
+      Coordinates.new(
+        39.14,
+        36.94
+      ),
+      223.04,
+      45.08,
+      62.98,
+      nil,
+      []
+    ),
+    SingleLocationMarkerV2.new(
+      'SingleLocation',
+      SingleLocationMarkerStatusEnum::UNAVAILABLE,
+      Coordinates.new(
+        39.14,
+        36.94
+      ),
+      223.04,
+      45.08,
+      62.98,
+      nil,
+      []
+    )
   ]
-}
+)
 ```
 

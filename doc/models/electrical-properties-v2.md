@@ -16,14 +16,14 @@ Electrical Properties of the Connector
 | `amperage` | `Float` | Optional | Electric Current in Amperes for this connector |
 | `max_electric_power` | `Float` | Optional | Power in Kilowatts for this connector |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "powerType": "AC1Phase",
-  "voltage": 230.0,
-  "amperage": 16.0,
-  "maxElectricPower": 3.7
-}
+```ruby
+electrical_properties_v2 = ElectricalPropertiesV2.new(
+  ElectricalPropertiesPowerTypeEnum::AC1PHASE,
+  230,
+  16,
+  3.7
+)
 ```
 

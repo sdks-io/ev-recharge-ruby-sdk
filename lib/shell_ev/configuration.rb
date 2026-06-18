@@ -6,21 +6,19 @@
 module ShellEv
   # An enum for SDK environments.
   class Environment
-    # PRODUCTION: Production Server
-    # ENVIRONMENT2: Test Server
     ENVIRONMENT = [
-      PRODUCTION = 'production'.freeze,
-      ENVIRONMENT2 = 'environment2'.freeze
+      SIT = 'SIT'.freeze,
+      PRODUCTION = 'Production'.freeze
     ].freeze
 
     # Converts a string or symbol into a valid Environment constant.
-    def self.from_value(value, default_value = PRODUCTION)
+    def self.from_value(value, default_value = SIT)
       return default_value if value.nil?
 
       str = value.to_s.strip.downcase
       case str
+      when 'sit' then SIT
       when 'production' then PRODUCTION
-      when 'environment2' then ENVIRONMENT2
 
       else
         warn "[Environment] Unknown environment '#{value}', falling back to #{default_value} "
@@ -32,18 +30,18 @@ module ShellEv
   # An enum for API servers.
   class Server
     SERVER = [
-      DEFAULT = 'default'.freeze,
-      ACCESS_TOKEN_SERVER = 'access token server'.freeze
+      OAUTH_SERVER = 'OAuth Server'.freeze,
+      SHELL = 'Shell'.freeze
     ].freeze
 
     # Converts a string or symbol into a valid Server constant.
-    def self.from_value(value, default_value = DEFAULT)
+    def self.from_value(value, default_value = OAUTH_SERVER)
       return default_value if value.nil?
 
       str = value.to_s.strip.downcase
       case str
-      when 'default' then DEFAULT
-      when 'access_token_server' then ACCESS_TOKEN_SERVER
+      when 'oauth_server' then OAUTH_SERVER
+      when 'shell' then SHELL
 
       else
         warn "[Server] Unknown server '#{value}', falling back to #{default_value} "
@@ -79,7 +77,7 @@ module ShellEv
       max_retries: 0, retry_interval: 1, backoff_factor: 2,
       retry_statuses: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
       retry_methods: %i[get put], http_callback: nil, proxy_settings: nil,
-      environment: Environment::PRODUCTION, o_auth_client_id: nil,
+      environment: Environment::SIT, o_auth_client_id: nil,
       o_auth_client_secret: nil, o_auth_token: nil,
       client_credentials_auth_credentials: nil
     )
@@ -174,13 +172,13 @@ module ShellEv
 
     # All the environments the SDK can run in.
     ENVIRONMENTS = {
-      Environment::PRODUCTION => {
-        Server::DEFAULT => 'https://api.shell.com/ev',
-        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
+      Environment::SIT => {
+        Server::OAUTH_SERVER => 'https://api-test.shell.com',
+        Server::SHELL => 'https://api-test.shell.com/ev'
       },
-      Environment::ENVIRONMENT2 => {
-        Server::DEFAULT => 'https://api-test.shell.com/ev',
-        Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
+      Environment::PRODUCTION => {
+        Server::OAUTH_SERVER => 'https://api.shell.com',
+        Server::SHELL => 'https://api.shell.com/ev'
       }
     }.freeze
 
@@ -188,14 +186,14 @@ module ShellEv
     # @param [Configuration::Server] server The server enum for which the base URI is
     # required.
     # @return [String] The base URI.
-    def get_base_uri(server = Server::DEFAULT)
+    def get_base_uri(server = Server::SHELL)
       ENVIRONMENTS[environment][server].clone
     end
 
     # Builds a Configuration instance using environment variables.
     def self.build_default_config_from_env
       # === Core environment ===
-      environment = Environment.from_value(ENV.fetch('ENVIRONMENT', 'production'))
+      environment = Environment.from_value(ENV.fetch('ENVIRONMENT', 'sit'))
       timeout = (ENV['TIMEOUT'] || 60).to_f
       max_retries = (ENV['MAX_RETRIES'] || 0).to_i
       retry_interval = (ENV['RETRY_INTERVAL'] || 1).to_f

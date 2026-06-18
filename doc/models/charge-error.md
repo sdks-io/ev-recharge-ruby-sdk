@@ -12,12 +12,12 @@
 | `code` | `String` | Optional | Session code e.g InternalError |
 | `message` | `String` | Optional | Session message |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "code8",
-  "message": "message0"
-}
+```ruby
+charge_error = ChargeError.new(
+  'code8',
+  'message0'
+)
 ```
 

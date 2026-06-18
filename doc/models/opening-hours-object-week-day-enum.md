@@ -21,7 +21,7 @@
 
 ## Example
 
-```
-Mon
+```ruby
+opening_hours_object_week_day = OpeningHoursObjectWeekDayEnum::SUN
 ```
 

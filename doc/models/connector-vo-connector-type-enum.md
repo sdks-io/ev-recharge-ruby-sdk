@@ -32,7 +32,7 @@ Type of the connector in the EVSE unit.
 
 ## Example
 
-```
-Type2
+```ruby
+connector_vo_connector_type = ConnectorVOConnectorTypeEnum::TYPE2
 ```
 
